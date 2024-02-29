@@ -2,6 +2,7 @@
 out/
 .idea/
 build/
+doc/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
