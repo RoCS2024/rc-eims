@@ -18,9 +18,12 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+<<<<<<< HEAD
 /**
  * Unit tests for the EmployeeDaoImpl class.
  */
+=======
+>>>>>>> 0b59a48e0c9e6b11bda34d9fa989d259d815dbbf
 public class EmployeeDaoImplTest {
 
     @Mock
@@ -29,17 +32,23 @@ public class EmployeeDaoImplTest {
     @InjectMocks
     private EmployeeDaoImpl employeeDaoImpl;
 
+<<<<<<< HEAD
     /**
      * Initializes Mockito annotations before each test.
      */
+=======
+>>>>>>> 0b59a48e0c9e6b11bda34d9fa989d259d815dbbf
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
+<<<<<<< HEAD
     /**
      * Tests the getAllEmployee method.
      */
+=======
+>>>>>>> 0b59a48e0c9e6b11bda34d9fa989d259d815dbbf
     @Test
     public void testGetAllEmployee() {
 
@@ -59,9 +68,12 @@ public class EmployeeDaoImplTest {
         assertEquals(expectedResult.size(), 1);
           }
 
+<<<<<<< HEAD
     /**
      * Tests the getEmployeeByNo method.
      */
+=======
+>>>>>>> 0b59a48e0c9e6b11bda34d9fa989d259d815dbbf
     @Test
     public void testGetEmployeeByNo() {
 
