@@ -13,12 +13,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Unit tests for the EmployeeFacadeImpl class.
+ */
+
 public class EmployeeFacadeImplTest {
 
     private EmployeeDao employeeDao;
 
     private EmployeeFacadeImpl employeeFacade;
 
+    /**
+     * Sets up before each test.
+     */
     @BeforeEach
     public void setUp() {
         employeeDao = mock(EmployeeDao.class);
@@ -26,6 +33,9 @@ public class EmployeeFacadeImplTest {
     }
 
 
+    /**
+     * Tests the getAllEmployees method.
+     */
     @Test
     public void testGetAllEmployee() {
         List<Employee>  EmployeeList = new ArrayList<>();
@@ -39,6 +49,9 @@ public class EmployeeFacadeImplTest {
         assertEquals(EmployeeList, retrievedEmployeeList);
     }
 
+    /**
+     * Tests the getEmployeeByNo method.
+     */
     @Test
     void testGetEmployeeByNo() {
         String employeeNo = "1";

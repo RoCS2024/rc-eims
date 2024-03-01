@@ -18,6 +18,9 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit tests for the EmployeeDaoImpl class.
+ */
 public class EmployeeDaoImplTest {
 
     @Mock
@@ -26,11 +29,17 @@ public class EmployeeDaoImplTest {
     @InjectMocks
     private EmployeeDaoImpl employeeDaoImpl;
 
+    /**
+     * Initializes Mockito annotations before each test.
+     */
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Tests the getAllEmployee method.
+     */
     @Test
     public void testGetAllEmployee() {
 
@@ -50,6 +59,9 @@ public class EmployeeDaoImplTest {
         assertEquals(expectedResult.size(), 1);
           }
 
+    /**
+     * Tests the getEmployeeByNo method.
+     */
     @Test
     public void testGetEmployeeByNo() {
 
