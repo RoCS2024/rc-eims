@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Ant Test Project" default="build">
+<project name="Employee-Information-Management-System" default="build">
     <property name="dst.dir" value="out"/>
     <property name="source" value="src/main/java"/>
     <property file="build.properties"/>
