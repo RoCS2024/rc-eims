@@ -2,13 +2,23 @@ package com.employee.information.management.data.employee.dao.impl;
 
 import com.employee.information.management.app.model.Employee;
 import com.employee.information.management.data.connection.ConnectionHelper;
+<<<<<<< Updated upstream
+=======
+import com.employee.information.management.data.employee.dao.EmployeeDao;
+>>>>>>> Stashed changes
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+<<<<<<< Updated upstream
 public class EmployeeDaoImpl {
+=======
+public class EmployeeDaoImpl implements EmployeeDao {
+
+    //update employee
+>>>>>>> Stashed changes
     @Override
     public Employee getEmployeeByNo(String employeeNo)  {
         String sql = "SELECT * FROM employee WHERE employee_no = ?";

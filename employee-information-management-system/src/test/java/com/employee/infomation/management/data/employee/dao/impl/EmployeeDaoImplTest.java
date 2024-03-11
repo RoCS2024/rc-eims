@@ -1,5 +1,6 @@
 package com.employee.infomation.management.data.employee.dao.impl;
 
+<<<<<<< Updated upstream
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,10 @@ import com.employee.information.management.app.facade.employee.impl.EmployeeFaca
 import com.employee.information.management.app.model.Employee;
 import com.employee.information.management.data.connection.ConnectionHelper;
 import com.employee.information.management.data.employee.dao.EmployeeDao;
+=======
+import com.employee.information.management.app.model.Employee;
+import com.employee.information.management.data.connection.ConnectionHelper;
+>>>>>>> Stashed changes
 import com.employee.information.management.data.employee.dao.impl.EmployeeDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +20,25 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+<<<<<<< Updated upstream
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class EmployeeDaoImplTest {
+=======
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+public class EmployeeDaoImplTest {
+
+    //update employee
+>>>>>>> Stashed changes
     @Mock
     private ConnectionHelper connectionHelper;
 
