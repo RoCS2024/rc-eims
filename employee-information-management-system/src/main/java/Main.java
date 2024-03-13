@@ -6,13 +6,8 @@ import com.employee.information.management.data.employee.dao.impl.EmployeeDaoImp
 import java.util.Scanner;
 
 public class Main {
-<<<<<<< Updated upstream
-=======
-
-    //updating employee
->>>>>>> Stashed changes
     public static void main(String[] args) {
-        EmployeeFacade employeeFacade = new EmployeeFacadeImpl(new EmployeeDaoImpl());
+        EmployeeFacade employeeFacade = (EmployeeFacade) new EmployeeFacadeImpl(new EmployeeDaoImpl());
         Scanner scanner = new Scanner(System.in);
 
         try {

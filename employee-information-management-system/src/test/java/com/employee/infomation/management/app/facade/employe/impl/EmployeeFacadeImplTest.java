@@ -13,11 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class EmployeeFacadeImplTest {
-<<<<<<< Updated upstream
-=======
-
-    //update employee
->>>>>>> Stashed changes
     @Mock
     private EmployeeDao employeeDao;
 
@@ -36,17 +31,8 @@ public class EmployeeFacadeImplTest {
         mockedEmployee.setEmployeeNo(employeeNo);
         when(employeeDao.getEmployeeByNo(employeeNo)).thenReturn(mockedEmployee);
 
-<<<<<<< Updated upstream
 
         Employee resultEmployee = employeeFacade.getEmployeeByNo(employeeNo);
-
-
-=======
-        // Call method
-        Employee resultEmployee = employeeFacade.getEmployeeByNo(employeeNo);
-
-        // Verify
->>>>>>> Stashed changes
         assertNotNull(resultEmployee);
         assertEquals(employeeNo, resultEmployee.getEmployeeNo());
     }
