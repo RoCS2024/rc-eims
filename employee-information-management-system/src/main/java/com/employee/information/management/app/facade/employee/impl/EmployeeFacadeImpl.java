@@ -35,12 +35,9 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
         }
         return result;
     }
-
     // add employee
-    public EmployeeFacadeImpl(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
 
+    @Override
     public boolean addEmployee(Employee employee) {
         boolean result = false;
         try {
@@ -49,19 +46,14 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
                 throw new RuntimeException("Employee to add already exists.");
             }
             result = employeeDao.addEmployee(employee);
+            if (result) {
+                System.out.println("Employee added successfully.");
+            } else {
+                System.out.println("Failed to add employee.");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-
-        if (result) {
-            System.out.println("Employee added successfully.");
-        } else {
-            System.out.println("Failed to add employee.");
-        }
         return result;
-    }
-    @Override
-    public Employee getEmployeeById(String id) {
-        return null;
     }
 }

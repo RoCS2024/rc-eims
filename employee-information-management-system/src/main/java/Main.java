@@ -172,6 +172,5 @@ public class Main {
         employeeFacade.addEmployee(employee);
 
         scanner.close();
-        Connection con = ConnectionHelper.getConnection();
     }
 }

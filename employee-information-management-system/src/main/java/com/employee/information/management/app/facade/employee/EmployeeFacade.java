@@ -12,5 +12,5 @@ public interface EmployeeFacade {
 
     //add employee
     Employee getEmployeeById(String id);
-    boolean addEmployee(Employee employee);
+    boolean addEmployee(Employee employee) throws RuntimeException;
 }
