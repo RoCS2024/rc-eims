@@ -5,6 +5,8 @@ import com.employee.information.management.app.model.Employee;
 import com.employee.information.management.data.employee.dao.EmployeeDao;
 import com.employee.information.management.data.employee.dao.impl.EmployeeDaoImpl;
 
+import java.util.List;
+
 public class EmployeeFacadeImpl implements EmployeeFacade {
 
     //update employee
@@ -14,10 +16,14 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
+    public List<Employee> getAllEmployees() throws RuntimeException {
+        return null;
+    }
+
+    @Override
     public Employee getEmployeeByNo(String employeeNo) {
         return employeeDao.getEmployeeByNo(employeeNo);
     }
-
     @Override
     public boolean updateEmployee(Employee employee) {
         boolean result = false;

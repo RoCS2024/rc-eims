@@ -9,8 +9,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+
+    @Override
+    public List<Employee> getAllEmployee() {
+        return null;
+    }
 
     @Override
     public Employee getEmployeeByNo(String employeeNo)  {
@@ -49,6 +55,39 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
         return null;
     }
+    @Override
+    public boolean updateEmployee(Employee employee)  {
+        String sql = "UPDATE employee SET last_name = ?, first_name = ?, middle_name = ?, position_in_rc = ?, date_employed = ?, birthdate = ?, birthplace = ?, sex = ?, civil_status = ?, citizenship = ?, religion = ?, height = ?, weight = ?, email = ?, sss_no = ?, tin_no = ?, pagibig_no = ? WHERE employee_no = ?";
+        try  (Connection con = ConnectionHelper.getConnection();
+              PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, employee.getLastName());
+            statement.setString(2, employee.getFirstName());
+            statement.setString(3, employee.getMiddleName());
+            statement.setString(4, employee.getPositionInRC());
+            statement.setString(5, employee.getDateEmployed());
+            statement.setString(6, employee.getBirthDate());
+            statement.setString(7, employee.getBirthPlace());
+            statement.setString(8, employee.getSex());
+            statement.setString(9, employee.getCivilStatus());
+            statement.setString(10, employee.getCitizenship());
+            statement.setString(11, employee.getReligion());
+            statement.setDouble(12, employee.getHeight());
+            statement.setDouble(13, employee.getWeight());
+            statement.setString(14, employee.getEmail());
+            statement.setString(15, employee.getSssNo());
+            statement.setString(16, employee.getTinNo());
+            statement.setString(17, employee.getPagibigNo());
+            statement.setString(18, employee.getEmployeeNo());
+            int affectedRows = statement.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException ex) {
+            System.err.println("Error updating employee with no. " + employee.getEmployeeNo() + ": " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    //for update employee
     @Override
     public boolean updateEmployee(Employee employee)  {
         String sql = "UPDATE employee SET last_name = ?, first_name = ?, middle_name = ?, position_in_rc = ?, date_employed = ?, birthdate = ?, birthplace = ?, sex = ?, civil_status = ?, citizenship = ?, religion = ?, height = ?, weight = ?, email = ?, sss_no = ?, tin_no = ?, pagibig_no = ? WHERE employee_no = ?";

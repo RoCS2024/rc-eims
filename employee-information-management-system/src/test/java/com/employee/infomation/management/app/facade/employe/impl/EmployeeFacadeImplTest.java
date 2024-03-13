@@ -7,8 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import java.util.ArrayList;
+import java.util.List;
 
+import static javax.management.Query.times;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -19,6 +21,40 @@ public class EmployeeFacadeImplTest {
     @InjectMocks
     private EmployeeFacadeImpl employeeFacade;
 
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    public void setUp() {
+        employeeDao = mock(EmployeeDao.class);
+        employeeFacade = new EmployeeFacadeImpl();
+    }
+
+    @Test
+    public void testGetAllEmployee() {
+        List<Employee> EmployeeList = new ArrayList<>();
+        EmployeeList.add(new Employee());
+        EmployeeList.add(new Employee());
+        when(employeeDao.getAllEmployee()).thenReturn(EmployeeList);
+
+        List<Employee> retrievedEmployeeList = employeeFacade.getAllEmployees();
+
+        verify(employeeDao, times(1).getAllEmployee();
+        assertEquals(EmployeeList, retrievedEmployeeList);
+    }
+    @Test
+    void testGetEmployeeByNo() {
+        String employeeNo = "123";
+        Employee mockedEmployee = new Employee();
+        mockedEmployee.setEmployeeNo(employeeNo);
+        when(employeeDao.getEmployeeByNo(employeeNo)).thenReturn(mockedEmployee);
+
+
+        Employee resultEmployee = employeeFacade.getEmployeeByNo(employeeNo);
+        assertNotNull(resultEmployee);
+        assertEquals(employeeNo, resultEmployee.getEmployeeNo());
+    }
+
+    //update employee
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -33,6 +69,8 @@ public class EmployeeFacadeImplTest {
 
 
         Employee resultEmployee = employeeFacade.getEmployeeByNo(employeeNo);
+
+
         assertNotNull(resultEmployee);
         assertEquals(employeeNo, resultEmployee.getEmployeeNo());
     }
@@ -54,7 +92,6 @@ public class EmployeeFacadeImplTest {
         verify(employeeDao).getEmployeeByNo(employeeNo);
         verify(employeeDao).updateEmployee(employeeToUpdate);
     }
-
     @Test
     void testUpdateEmployeeNotFound() {
 
@@ -69,5 +106,6 @@ public class EmployeeFacadeImplTest {
 
         verify(employeeDao).getEmployeeByNo(employeeNo);
         verify(employeeDao, never()).updateEmployee(employeeToUpdate);
+    }
     }
 }

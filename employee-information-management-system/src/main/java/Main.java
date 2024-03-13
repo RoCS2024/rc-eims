@@ -6,8 +6,9 @@ import com.employee.information.management.data.employee.dao.impl.EmployeeDaoImp
 import java.util.Scanner;
 
 public class Main {
+    //update employee
     public static void main(String[] args) {
-        EmployeeFacade employeeFacade = (EmployeeFacade) new EmployeeFacadeImpl(new EmployeeDaoImpl());
+        EmployeeFacade employeeFacade = new EmployeeFacadeImpl(new EmployeeDaoImpl());
         Scanner scanner = new Scanner(System.in);
 
         try {
@@ -122,3 +123,4 @@ public class Main {
         }
     }
 }
+
