@@ -8,4 +8,5 @@ public interface EmployeeFacade {
     List<Employee> getAllEmployees() throws RuntimeException;
 
     Employee getEmployeeByNo(String employee_no) throws RuntimeException;
+    boolean updateEmployee(Employee employee);
 }

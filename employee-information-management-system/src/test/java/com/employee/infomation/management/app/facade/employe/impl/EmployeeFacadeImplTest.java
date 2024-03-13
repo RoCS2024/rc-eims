@@ -6,12 +6,15 @@ import com.employee.information.management.app.model.Employee;
 import com.employee.information.management.data.employee.dao.EmployeeDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static javax.management.Query.times;
+import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class EmployeeFacadeImplTest {
     private EmployeeDao employeeDao;
@@ -49,6 +52,61 @@ class EmployeeFacadeImplTest {
 
         verify(employeeDao, times(1)).getEmployeeByNo(employeeNo);
         assertEquals(employee, retrievedEmployee);
+    }
+
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testGetEmployeeByNo() {
+        String employeeNo = "123";
+        Employee mockedEmployee = new Employee();
+        mockedEmployee.setEmployeeNo(employeeNo);
+        when(employeeDao.getEmployeeByNo(employeeNo)).thenReturn(mockedEmployee);
+
+
+        Employee resultEmployee = employeeFacade.getEmployeeByNo(employeeNo);
+
+
+        assertNotNull(resultEmployee);
+        assertEquals(employeeNo, resultEmployee.getEmployeeNo());
+    }
+
+    @Test
+    void testUpdateEmployee() {
+
+        String employeeNo = "123";
+        Employee employeeToUpdate = new Employee();
+        employeeToUpdate.setEmployeeNo(employeeNo);
+        when(employeeDao.getEmployeeByNo(employeeNo)).thenReturn(employeeToUpdate);
+        when(employeeDao.updateEmployee(employeeToUpdate)).thenReturn(true);
+
+
+        boolean result = employeeFacade.updateEmployee(employeeToUpdate);
+
+
+        assertTrue(result);
+        verify(employeeDao).getEmployeeByNo(employeeNo);
+        verify(employeeDao).updateEmployee(employeeToUpdate);
+    }
+
+    @Test
+    void testUpdateEmployeeNotFound() {
+
+        String employeeNo = "123";
+        Employee employeeToUpdate = new Employee();
+        employeeToUpdate.setEmployeeNo(employeeNo);
+        when(employeeDao.getEmployeeByNo(employeeNo)).thenReturn(null);
+
+
+        assertThrows(RuntimeException.class, () -> employeeFacade.updateEmployee(employeeToUpdate));
+
+
+        verify(employeeDao).getEmployeeByNo(employeeNo);
+        verify(employeeDao, never()).updateEmployee(employeeToUpdate);
     }
 
 }
