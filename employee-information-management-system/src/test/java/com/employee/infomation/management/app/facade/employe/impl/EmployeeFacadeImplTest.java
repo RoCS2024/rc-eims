@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.management.Query.times;
-import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -109,4 +108,38 @@ class EmployeeFacadeImplTest {
         verify(employeeDao, never()).updateEmployee(employeeToUpdate);
     }
 
+
+    //add employee
+    @Test
+    void testAddEmployee() {
+        EmployeeDao employeeDao = mock(EmployeeDao.class);
+        EmployeeFacadeImpl employeeFacade = new EmployeeFacadeImpl(employeeDao);
+
+        Employee employee = new Employee("Joan", "Doe", "Smith", "Teacher", "10-10-2012", "09-16-1992", "USA", "Male", "Single", "Filipino", "Catholic", "177", "75", "me@gmail.com", null, null, null, null);
+
+        when(employeeDao.getEmployeeById("123")).thenReturn(null);
+        when(employeeDao.addEmployee(employee)).thenReturn(true);
+
+        boolean result = employeeFacade.addEmployee(employee);
+
+        assertTrue(result, "Employee should be added successfully");
+        verify(employeeDao, times(1)).getEmployeeById("123");
+        verify(employeeDao, times(1)).addEmployee(employee);
+    }
+
+    @Test
+    void testAddExistingEmployee() {
+        EmployeeDao employeeDao = mock(EmployeeDao.class);
+        EmployeeFacadeImpl employeeFacade = new EmployeeFacadeImpl(employeeDao);
+
+        Employee employee = new Employee("Joan", "Doe", "Smith", "Teacher", "10-10-2012", "09-16-1992", "USA", "Male", "Single", "Filipino", "Catholic", "177", "75", "me@gmail.com", null, null, null, null);
+
+        when(employeeDao.getEmployeeById("123")).thenReturn(employee);
+
+        assertThrows(RuntimeException.class, () -> employeeFacade.addEmployee(employee),
+                "Adding an existing employee should throw RuntimeException");
+
+        verify(employeeDao, times(1)).getEmployeeById("123");
+        verify(employeeDao, never()).addEmployee(any(Employee.class));
+    }
 }
