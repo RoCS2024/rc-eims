@@ -9,4 +9,7 @@ public interface EmployeeFacade {
 
     Employee getEmployeeByNo(String employee_no) throws RuntimeException;
     boolean updateEmployee(Employee employee);
+
+    //add employee
+    boolean addEmployee(Employee employee) throws RuntimeException;
 }

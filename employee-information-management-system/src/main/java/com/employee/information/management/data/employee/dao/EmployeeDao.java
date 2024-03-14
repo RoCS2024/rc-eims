@@ -11,4 +11,8 @@ public interface EmployeeDao {
 
     //update employee
     boolean updateEmployee(Employee employee);
+
+    //add employee
+    boolean addEmployee(Employee employee);
+    Employee getEmployeeById(String id);
 }

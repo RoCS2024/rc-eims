@@ -21,8 +21,6 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     //update employee
-    public EmployeeFacadeImpl(EmployeeDao employeeDao) {
-    }
     @Override
     public boolean updateEmployee(Employee employee) {
         boolean result = false;
@@ -32,6 +30,27 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
                 throw new Exception("Offense to update not found. ");
             }
             result = employeeDao.updateEmployee(employee);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return result;
+    }
+    // add employee
+
+    @Override
+    public boolean addEmployee(Employee employee) {
+        boolean result = false;
+        try {
+            Employee targetEmployee = employeeDao.getEmployeeById(employee.getEmployeeNo());
+            if (targetEmployee != null) {
+                throw new RuntimeException("Employee to add already exists.");
+            }
+            result = employeeDao.addEmployee(employee);
+            if (result) {
+                System.out.println("Employee added successfully.");
+            } else {
+                System.out.println("Failed to add employee.");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
