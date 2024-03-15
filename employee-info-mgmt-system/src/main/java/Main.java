@@ -17,22 +17,26 @@ public class Main {
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    viewAllEmployees();
-                    break;
-                case 2:
-                    addEmployee();
-                    break;
-                case 3:
-                    updateEmployee();
-                    break;
-                case 0:
-                    System.out.println("Thank you for using Employee Management System!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+            try {
+                switch (choice) {
+                    case 1:
+                        viewAllEmployees();
+                        break;
+                    case 2:
+                        addEmployee();
+                        break;
+                    case 3:
+                        updateEmployee();
+                        break;
+                    case 0:
+                        System.out.println("Thank you for using Employee Management System!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
             }
         } while (choice != 0);
     }
@@ -46,24 +50,32 @@ public class Main {
     }
 
     private static void viewAllEmployees() {
-        List<Employee> employees = employeeFacade.getAllEmployees();
-        if (employees != null && !employees.isEmpty()) {
-            System.out.println("Employees:");
-            for (Employee employee : employees) {
-                System.out.println(employee);
+        try {
+            List<Employee> employees = employeeFacade.getAllEmployees();
+            if (employees != null && !employees.isEmpty()) {
+                System.out.println("Employees:");
+                for (Employee employee : employees) {
+                    System.out.println(employee);
+                }
+            } else {
+                System.out.println("No employees found.");
             }
-        } else {
-            System.out.println("No employees found.");
+        } catch (Exception e) {
+            System.out.println("Error fetching employees: " + e.getMessage());
         }
     }
 
     private static void addEmployee() {
-        Employee employee = getEmployeeDetailsFromUser();
-        boolean result = employeeFacade.addEmployee(employee);
-        if (result) {
-            System.out.println("Employee added successfully.");
-        } else {
-            System.out.println("Failed to add employee.");
+        try {
+            Employee employee = getEmployeeDetailsFromUser();
+            boolean result = employeeFacade.addEmployee(employee);
+            if (result) {
+                System.out.println("Employee added successfully.");
+            } else {
+                System.out.println("Failed to add employee.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error adding employee: " + e.getMessage());
         }
     }
 
@@ -109,126 +121,128 @@ public class Main {
     }
 
     private static void updateEmployee() {
-        System.out.print("Enter employee ID to update: ");
-        String employeeId = scanner.nextLine();
-        Employee employee = employeeFacade.getEmployeeById(employeeId);
-        if (employee != null) {
-            System.out.println("Select the field to update:");
-            System.out.println("1. Last Name");
-            System.out.println("2. First Name");
-            System.out.println("3. Middle Name");
-            System.out.println("4. Position in RC");
-            System.out.println("5. Date Employed");
-            System.out.println("6. Birthdate");
-            System.out.println("7. Birthplace");
-            System.out.println("8. Sex");
-            System.out.println("9. Civil Status");
-            System.out.println("10. Citizenship");
-            System.out.println("11. Religion");
-            System.out.println("12. Height");
-            System.out.println("13. Weight");
-            System.out.println("14. Email");
-            System.out.println("15. SSS Number");
-            System.out.println("16. TIN Number");
-            System.out.println("17. Pagibig Number");
-            System.out.println("18. Employee Number");
+        try {
+            System.out.print("Enter employee ID to update: ");
+            String employeeId = scanner.nextLine();
+            Employee employee = employeeFacade.getEmployeeById(employeeId);
+            if (employee != null) {
+                System.out.println("Select the field to update:");
+                System.out.println("1. Last Name");
+                System.out.println("2. First Name");
+                System.out.println("3. Middle Name");
+                System.out.println("4. Position in RC");
+                System.out.println("5. Date Employed");
+                System.out.println("6. Birthdate");
+                System.out.println("7. Birthplace");
+                System.out.println("8. Sex");
+                System.out.println("9. Civil Status");
+                System.out.println("10. Citizenship");
+                System.out.println("11. Religion");
+                System.out.println("12. Height");
+                System.out.println("13. Weight");
+                System.out.println("14. Email");
+                System.out.println("15. SSS Number");
+                System.out.println("16. TIN Number");
+                System.out.println("17. Pagibig Number");
+                System.out.println("18. Employee Number");
 
 
+                System.out.print("Enter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter new Last Name: ");
+                        employee.setLastName(validateStringInput());
+                        break;
+                    case 2:
+                        System.out.print("Enter new First Name: ");
+                        employee.setFirstName(validateStringInput());
+                        break;
+                    case 3:
+                        System.out.print("Enter new Middle Name: ");
+                        employee.setMiddleName(validateStringInput());
+                        break;
+                    case 4:
+                        System.out.print("Enter Position in RC: ");
+                        employee.setPositionInRC(validateStringInput());
+                        break;
+                    case 5:
+                        System.out.print("Enter new Date Employed: ");
+                        employee.setDateEmployed(validateStringInput());
+                        break;
+                    case 6:
+                        System.out.print("Enter new Birthdate: ");
+                        employee.setBirthdate(validateStringInput());
+                        break;
+                    case 7:
+                        System.out.print("Enter new Birthplace: ");
+                        employee.setBirthplace(validateStringInput());
+                        break;
+                    case 8:
+                        System.out.print("Enter new Sex: ");
+                        employee.setSex(validateStringInput());
+                        break;
+                    case 9:
+                        System.out.print("Enter new Civil Status: ");
+                        employee.setCivilStatus(validateStringInput());
+                        break;
+                    case 10:
+                        System.out.print("Enter new Citizenship: ");
+                        employee.setCitizenship(validateStringInput());
+                        break;
+                    case 11:
+                        System.out.print("Enter new Religion: ");
+                        employee.setReligion(validateStringInput());
+                        break;
+                    case 12:
+                        System.out.print("Enter new Height: ");
+                        employee.setHeight(validateDoubleInput());
+                        break;
+                    case 13:
+                        System.out.print("Enter new Weight: ");
+                        employee.setWeight(validateDoubleInput());
+                        break;
+                    case 14:
+                        System.out.print("Enter new Email: ");
+                        employee.setEmail(validateStringInput());
+                        break;
+                    case 15:
+                        System.out.print("Enter new SSS Number: ");
+                        employee.setSssNo(validateStringInput());
+                        break;
+                    case 16:
+                        System.out.print("Enter new TIN Number: ");
+                        employee.setTinNo(validateStringInput());
+                        break;
+                    case 17:
+                        System.out.print("Enter new Pagibig Number: ");
+                        employee.setPagibigNo(validateStringInput());
+                        break;
+                    case 18:
+                        System.out.print("Enter new Employee Number: ");
+                        employee.setEmployeeNo(validateStringInput());
+                        break;
 
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter new Last Name: ");
-                    employee.setLastName(validateStringInput());
-                    break;
-                case 2:
-                    System.out.print("Enter new First Name: ");
-                    employee.setFirstName(validateStringInput());
-                    break;
-                case 3:
-                    System.out.print("Enter new Middle Name: ");
-                    employee.setMiddleName(validateStringInput());
-                    break;
-                case 4:
-                    System.out.print("Enter Position in RC: ");
-                    employee.setPositionInRC(validateStringInput());
-                    break;
-                case 5:
-                    System.out.print("Enter new Date Employed: ");
-                    employee.setDateEmployed(validateStringInput());
-                    break;
-                case 6:
-                    System.out.print("Enter new Birthdate: ");
-                    employee.setBirthdate(validateStringInput());
-                    break;
-                case 7:
-                    System.out.print("Enter new Birthplace: ");
-                    employee.setBirthplace(validateStringInput());
-                    break;
-                case 8:
-                    System.out.print("Enter new Sex: ");
-                    employee.setSex(validateStringInput());
-                    break;
-                case 9:
-                    System.out.print("Enter new Civil Status: ");
-                    employee.setCivilStatus(validateStringInput());
-                    break;
-                case 10:
-                    System.out.print("Enter new Citizenship: ");
-                    employee.setCitizenship(validateStringInput());
-                    break;
-                case 11:
-                    System.out.print("Enter new Religion: ");
-                    employee.setReligion(validateStringInput());
-                    break;
-                case 12:
-                    System.out.print("Enter new Height: ");
-                    employee.setHeight(validateDoubleInput());
-                    break;
-                case 13:
-                    System.out.print("Enter new Weight: ");
-                    employee.setWeight(validateDoubleInput());
-                    break;
-                case 14:
-                    System.out.print("Enter new Email: ");
-                    employee.setEmail(validateStringInput());
-                    break;
-                case 15:
-                    System.out.print("Enter new SSS Number: ");
-                    employee.setSssNo(validateStringInput());
-                    break;
-                case 16:
-                    System.out.print("Enter new TIN Number: ");
-                    employee.setTinNo(validateStringInput());
-                    break;
-                case 17:
-                    System.out.print("Enter new Pagibig Number: ");
-                    employee.setPagibigNo(validateStringInput());
-                    break;
-                case 18:
-                    System.out.print("Enter new Employee Number: ");
-                    employee.setEmployeeNo(validateStringInput());
-                    break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        return;
+                }
 
-                default:
-                    System.out.println("Invalid choice.");
-                    return;
-            }
-
-            boolean result = employeeFacade.updateEmployee(employee);
-            if (result) {
-                System.out.println("Employee updated successfully.");
-            } else {
-                System.out.println("Failed to update employee.");
-            }
-        } else {
-            System.out.println("Employee not found.");
+                boolean result = employeeFacade.updateEmployee(employee);
+                if (result) {
+                    System.out.println("Employee updated successfully.");
+                } else {
+                    System.out.println("Failed to update employee.");
+                }
+                } else {
+                System.out.println("Employee not found.");
+                }
+        } catch (Exception e) {
+            System.out.println("Error updating employee: " + e.getMessage());
         }
     }
-
     private static String validateStringInput() {
         String input;
         do {
