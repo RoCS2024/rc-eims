@@ -11,7 +11,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/byte-buddy-agent-1.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Junit Dependencies/byte-buddy-1.13.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -20,7 +20,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/byte-buddy-1.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Junit Dependencies/byte-buddy-agent-1.13.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -29,7 +29,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/junit-jupiter-api-5.8.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Junit Dependencies/junit-jupiter-engine-5.8.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -38,7 +38,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/junit-jupiter-engine-5.8.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Junit Dependencies/junit-platform-commons-1.8.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -47,7 +47,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/junit-platform-commons-1.8.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Junit Dependencies/junit-platform-engine-1.8.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -56,7 +56,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/junit-platform-engine-1.8.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Junit Dependencies/mockito-core-5.8.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -65,7 +65,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/JUnit/mockito-core-5.8.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/ojdbc11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -74,7 +74,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../Installer/DB/jdbc/lib/ojdbc11.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/junit-jupiter-api-5.8.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
