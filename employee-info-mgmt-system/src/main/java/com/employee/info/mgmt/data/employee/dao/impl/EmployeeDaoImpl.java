@@ -37,11 +37,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> getAllEmployee() {
-        return null;
-    }
-
-    @Override
     public Employee getEmployeeById(String id) {
         try {
             PreparedStatement stmt = c.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT);
