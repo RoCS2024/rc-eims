@@ -144,7 +144,7 @@ public class Main {
                 System.out.println("15. SSS Number");
                 System.out.println("16. TIN Number");
                 System.out.println("17. Pagibig Number");
-                System.out.println("18. Employee Number");
+
 
 
                 System.out.print("Enter your choice: ");
