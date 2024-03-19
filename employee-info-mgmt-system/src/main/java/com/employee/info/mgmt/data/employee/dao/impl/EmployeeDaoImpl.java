@@ -3,6 +3,8 @@ package com.employee.info.mgmt.data.employee.dao.impl;
 import com.employee.info.mgmt.app.model.Employee;
 import com.employee.info.mgmt.data.connection.ConnectionHelper;
 import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,8 @@ import java.util.List;
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
     Connection c = ConnectionHelper.getConnection();
 
     public EmployeeDaoImpl() {
@@ -29,15 +33,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
             while (rs.next()) {
                 employees.add(setEmployee(rs));
             }
-            return employees;
+            LOGGER.info("Employee retrieved successfully.");
         } catch (Exception e) {
-
+            LOGGER.warn("An SQL Exception occurred." + e.getMessage());
         }
-        return null;
-    }
-
-    @Override
-    public List<Employee> getAllEmployee() {
+        LOGGER.debug("Employee database is empty.");
         return null;
     }
 
@@ -48,12 +48,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                LOGGER.debug("Employee retrieved successfully.");
                 return setEmployee(rs);
             }
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            LOGGER.error("An SQL Exception occurred." + e.getMessage());
         }
+        LOGGER.debug("Employee not found.");
         return null;
     }
 
@@ -83,8 +85,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
             int result = stmt.executeUpdate();
             return result == 1;
         } catch (Exception e) {
-            throw new RuntimeException("Error adding employee", e);
+            LOGGER.error("An SQL Exception occurred." + e.getMessage());
         }
+        LOGGER.debug("Adding employee failed.");
+        return false;
     }
 
     @Override
@@ -113,8 +117,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
             int result = stmt.executeUpdate();
             return result == 1;
         } catch (Exception e) {
-            throw new RuntimeException("Error updating employee", e);
+            LOGGER.error("An SQL Exception occurred." + e.getMessage());
         }
+        LOGGER.debug("Updating employee failed.");
+        return false;
     }
 
     private Employee setEmployee(ResultSet rs) {
@@ -140,10 +146,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
             employee.setEmployeeNo(rs.getString("employee_no"));
             return employee;
         } catch (Exception e) {
-
+            LOGGER.error("An SQL Exception occurred." + e.getMessage());
         }
+        LOGGER.debug("No employee was set.");
         return null;
     }
-
-
 }
