@@ -144,7 +144,7 @@ public class Main {
                 System.out.println("15. SSS Number");
                 System.out.println("16. TIN Number");
                 System.out.println("17. Pagibig Number");
-                System.out.println("18. Employee Number");
+
 
 
                 System.out.print("Enter your choice: ");
@@ -219,10 +219,6 @@ public class Main {
                     case 17:
                         System.out.print("Enter new Pagibig Number: ");
                         employee.setPagibigNo(validateStringInput());
-                        break;
-                    case 18:
-                        System.out.print("Enter new Employee Number: ");
-                        employee.setEmployeeNo(validateStringInput());
                         break;
 
                     default:
