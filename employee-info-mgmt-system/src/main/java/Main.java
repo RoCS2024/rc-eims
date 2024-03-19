@@ -220,10 +220,6 @@ public class Main {
                         System.out.print("Enter new Pagibig Number: ");
                         employee.setPagibigNo(validateStringInput());
                         break;
-                    case 18:
-                        System.out.print("Enter new Employee Number: ");
-                        employee.setEmployeeNo(validateStringInput());
-                        break;
 
                     default:
                         System.out.println("Invalid choice.");
