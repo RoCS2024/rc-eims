@@ -50,18 +50,11 @@ public class Main {
     }
 
     private static void viewAllEmployees() {
-        try {
-            List<Employee> employees = employeeFacade.getAllEmployees();
-            if (employees != null && !employees.isEmpty()) {
-                System.out.println("Employees:");
-                for (Employee employee : employees) {
-                    System.out.println(employee);
-                }
-            } else {
-                System.out.println("No employees found.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error fetching employees: " + e.getMessage());
+        System.out.println("Showing all Employees ...");
+        List<Employee> employeeList =employeeFacade.getAllEmployees();
+        for (Employee employee :employeeList){
+
+            System.out.println("Last Name: "  + employee.getLastName() + " | First Name: " + employee.getFirstName() + "| Middle Name: "+ employee.getMiddleName() + "| Position in RC: " + employee.getPositionInRC() + "| Date Employed: "+ employee.getDateEmployed() + "| Birthdate: "+ employee.getBirthdate() +"| Sex: "+ employee.getSex() + "| Civil Status: "+ employee.getCivilStatus()+ "| Citezenship: "+ employee.getCitizenship() +"| Religion: "+ employee.getReligion()+"| Height: "+employee.getHeight()+"| Weight: " +employee.getWeight()+ "| Email: "+employee.getEmail()+ "| SSS No: "+employee.getSssNo()+"| TIN No: "+employee.getTinNo()+"| Pag Ibig No: "+ employee.getPagibigNo()+"| Employee No: "+employee.getEmployeeNo());
         }
     }
 
