@@ -190,28 +190,5 @@ public class Employee {
         this.employeeNo = employeeNo;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", positionInRC='" + positionInRC + '\'' +
-                ", dateEmployed='" + dateEmployed + '\'' +
-                ", birthdate='" + birthdate + '\'' +
-                ", birthplace='" + birthplace + '\'' +
-                ", sex='" + sex + '\'' +
-                ", civilStatus='" + civilStatus + '\'' +
-                ", citizenship='" + citizenship + '\'' +
-                ", religion='" + religion + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", email='" + email + '\'' +
-                ", sssNo='" + sssNo + '\'' +
-                ", tinNo='" + tinNo + '\'' +
-                ", pagibigNo='" + pagibigNo + '\'' +
-                ", employeeNo='" + employeeNo + '\'' +
-                '}';
-    }
 
 }
