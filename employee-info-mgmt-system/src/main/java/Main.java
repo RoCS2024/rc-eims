@@ -84,7 +84,7 @@ public class Main {
         employee.setPositionInRC(validateStringInput());
         System.out.print("Enter Date Employed: ");
         employee.setDateEmployed(validateStringInput());
-        System.out.print("Birthdate (yyyy-mm-dd hh:mm:ss): ");
+        System.out.print("Birthdate: ");
         employee.setBirthdate(validateStringInput());
         System.out.print("Birthplace: ");
         employee.setBirthplace(validateStringInput());
