@@ -4,6 +4,8 @@ import com.employee.info.mgmt.app.model.Employee;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -101,7 +103,7 @@ public class Main {
         System.out.print("Weight (in kg): ");
         employee.setWeight(validateDoubleInput());
         System.out.print("Email: ");
-        employee.setEmail(validateStringInput());
+        employee.setEmail(validateEmailInput());
         System.out.print("SSS Number: ");
         employee.setSssNo(validateStringInput());
         System.out.print("TIN Number: ");
@@ -199,7 +201,7 @@ public class Main {
                         break;
                     case 14:
                         System.out.print("Enter new Email: ");
-                        employee.setEmail(validateStringInput());
+                        employee.setEmail(validateEmailInput());
                         break;
                     case 15:
                         System.out.print("Enter new SSS Number: ");
@@ -256,5 +258,19 @@ public class Main {
             }
         } while (!valid);
         return value;
+    }
+
+    private static String validateEmailInput() {
+        String email;
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+        Matcher matcher;
+        do {
+            email = scanner.nextLine().trim();
+            matcher = pattern.matcher(email);
+            if (!matcher.matches()) {
+                System.out.print("Invalid email. Please enter a valid email address: ");
+            }
+        } while (!matcher.matches());
+        return email;
     }
 }
