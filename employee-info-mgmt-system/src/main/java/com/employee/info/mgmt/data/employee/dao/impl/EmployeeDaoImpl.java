@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
@@ -68,7 +70,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setString(3, employee.getMiddleName());
             stmt.setString(4, employee.getPositionInRC());
             stmt.setString(5, employee.getDateEmployed());
-            stmt.setTimestamp(6, Timestamp.valueOf(employee.getBirthdate()));
+            String birthdateString = employee.getBirthdate();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthdate = sdf.parse(birthdateString);
+            stmt.setDate(6, new java.sql.Date(birthdate.getTime()));
             stmt.setString(7, employee.getBirthplace());
             stmt.setString(8, employee.getSex());
             stmt.setString(9, employee.getCivilStatus());
