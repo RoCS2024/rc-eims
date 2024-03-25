@@ -53,10 +53,10 @@ public class Main {
 
     private static void viewAllEmployees() {
         System.out.println("Showing all Employees ...");
-        List<Employee> employeeList =employeeFacade.getAllEmployees();
-        for (Employee employee :employeeList){
+        List<Employee> employeeList = employeeFacade.getAllEmployees();
+        for (Employee employee : employeeList) {
 
-            System.out.println("Last Name: "  + employee.getLastName() + " | First Name: " + employee.getFirstName() + "| Middle Name: "+ employee.getMiddleName() + "| Position in RC: " + employee.getPositionInRC() + "| Date Employed: "+ employee.getDateEmployed() + "| Birthdate: "+ employee.getBirthdate() +"| Sex: "+ employee.getSex() + "| Civil Status: "+ employee.getCivilStatus()+ "| Citezenship: "+ employee.getCitizenship() +"| Religion: "+ employee.getReligion()+"| Height: "+employee.getHeight()+"| Weight: " +employee.getWeight()+ "| Email: "+employee.getEmail()+ "| SSS No: "+employee.getSssNo()+"| TIN No: "+employee.getTinNo()+"| Pag Ibig No: "+ employee.getPagibigNo()+"| Employee No: "+employee.getEmployeeNo());
+            System.out.println("Last Name: " + employee.getLastName() + " | First Name: " + employee.getFirstName() + "| Middle Name: " + employee.getMiddleName() + "| Position in RC: " + employee.getPositionInRC() + "| Date Employed: " + employee.getDateEmployed() + "| Birthdate: " + employee.getBirthdate() + "| Sex: " + employee.getSex() + "| Civil Status: " + employee.getCivilStatus() + "| Citezenship: " + employee.getCitizenship() + "| Religion: " + employee.getReligion() + "| Height: " + employee.getHeight() + "| Weight: " + employee.getWeight() + "| Email: " + employee.getEmail() + "| SSS No: " + employee.getSssNo() + "| TIN No: " + employee.getTinNo() + "| Pag Ibig No: " + employee.getPagibigNo() + "| Employee No: " + employee.getEmployeeNo());
         }
     }
 
@@ -105,11 +105,11 @@ public class Main {
         System.out.print("Email: ");
         employee.setEmail(validateEmailInput());
         System.out.print("SSS Number: ");
-        employee.setSssNo(validateStringInput());
+        employee.setSssNo(validateStringInputNumeric());
         System.out.print("TIN Number: ");
-        employee.setTinNo(validateStringInput());
+        employee.setTinNo(validateStringInputNumeric());
         System.out.print("Pagibig Number: ");
-        employee.setPagibigNo(validateStringInput());
+        employee.setPagibigNo(validateStringInputNumeric());
         System.out.print("Employee Number: ");
         employee.setEmployeeNo(validateStringInput());
         return employee;
@@ -139,7 +139,6 @@ public class Main {
                 System.out.println("15. SSS Number");
                 System.out.println("16. TIN Number");
                 System.out.println("17. Pagibig Number");
-
 
 
                 System.out.print("Enter your choice: ");
@@ -227,13 +226,14 @@ public class Main {
                 } else {
                     System.out.println("Failed to update employee.");
                 }
-                } else {
+            } else {
                 System.out.println("Employee not found.");
-                }
+            }
         } catch (Exception e) {
             System.out.println("Error updating employee: " + e.getMessage());
         }
     }
+
     private static String validateStringInput() {
         String input;
         do {
@@ -272,5 +272,18 @@ public class Main {
             }
         } while (!matcher.matches());
         return email;
+    }
+
+    private static String validateStringInputNumeric() {
+        String input;
+        do {
+            input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter again: ");
+            } else if (!input.matches("\\d+")) {
+                System.out.println("Invalid input. Please enter a numeric value: ");
+            }
+        } while (input.isEmpty() || !input.matches("\\d+"));
+        return input;
     }
 }
