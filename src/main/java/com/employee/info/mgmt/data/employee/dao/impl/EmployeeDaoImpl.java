@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,20 +27,25 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getAllEmployees() {
-        try {
-            PreparedStatement stmt = c.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
-            ResultSet rs = stmt.executeQuery();
-            List<Employee> employees = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
+        try ( PreparedStatement stmt = c.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
+              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                employees.add(setEmployee(rs));
+                Employee employee = new Employee();
+                employee.setEmployeeNo(rs.getString("employee_no"));
+                employee.setLastName(rs.getString("last_name"));
+                employee.setFirstName(rs.getString("first_name"));
+                employee.setMiddleName(rs.getString("middle_name"));
+                employees.add(employee);
             }
             LOGGER.info("Employee retrieved successfully.");
-        } catch (Exception e) {
-            LOGGER.warn("An SQL Exception occurred." + e.getMessage());
+        } catch (SQLException e) {
+            LOGGER.warn("Error retrieving all Employees." + e.getMessage());
+            e.printStackTrace();
         }
         LOGGER.debug("Employee database is empty.");
-        return null;
+        return employees;
     }
 
     @Override
