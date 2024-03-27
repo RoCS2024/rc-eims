@@ -1,6 +1,6 @@
 package com.employee.info.mgmt.data.employee.dao.impl;
 
-import com.employee.info.mgmt.app.model.Employee;
+import com.employee.info.mgmt.appl.model.Employee;
 import com.employee.info.mgmt.data.connection.ConnectionHelper;
 import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
 import org.slf4j.Logger;
@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

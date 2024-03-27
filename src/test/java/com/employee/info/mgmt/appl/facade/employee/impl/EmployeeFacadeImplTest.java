@@ -1,19 +1,4 @@
-package com.employee.info.mgmt.app.facade.employee.impl;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.employee.info.mgmt.app.facade.employee.EmployeeFacade;
-import com.employee.info.mgmt.app.model.Employee;
-import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
+package com.employee.info.mgmt.appl.facade.employee.impl;
 
 class EmployeeFacadeImplTest {
 //    @Mock
