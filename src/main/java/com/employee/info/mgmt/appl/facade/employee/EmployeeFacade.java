@@ -1,6 +1,6 @@
-package com.employee.info.mgmt.app.facade.employee;
+package com.employee.info.mgmt.appl.facade.employee;
 
-import com.employee.info.mgmt.app.model.Employee;
+import com.employee.info.mgmt.appl.model.Employee;
 
 import java.util.List;
 

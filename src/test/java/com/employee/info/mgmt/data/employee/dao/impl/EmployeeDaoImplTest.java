@@ -1,18 +1,6 @@
 package com.employee.info.mgmt.data.employee.dao.impl;
 
-import com.employee.info.mgmt.app.model.Employee;
-import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 class EmployeeDaoImplTest {
 

@@ -1,4 +1,4 @@
-package com.employee.info.mgmt.app.model;
+package com.employee.info.mgmt.appl.model;
 
 public class Employee {
     private String lastName;
