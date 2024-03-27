@@ -53,10 +53,20 @@ public class Main {
 
     private static void viewAllEmployees() {
         System.out.println("Showing all Employees ...");
-        List<Employee> employeeList =employeeFacade.getAllEmployees();
-        for (Employee employee :employeeList){
+        try {
+            List<Employee> employeeList = employeeFacade.getAllEmployees();
 
-            System.out.println("Last Name: "  + employee.getLastName() + " | First Name: " + employee.getFirstName() + "| Middle Name: "+ employee.getMiddleName() + "| Position in RC: " + employee.getPositionInRC() + "| Date Employed: "+ employee.getDateEmployed() + "| Birthdate: "+ employee.getBirthdate() +"| Sex: "+ employee.getSex() + "| Civil Status: "+ employee.getCivilStatus()+ "| Citezenship: "+ employee.getCitizenship() +"| Religion: "+ employee.getReligion()+"| Height: "+employee.getHeight()+"| Weight: " +employee.getWeight()+ "| Email: "+employee.getEmail()+ "| SSS No: "+employee.getSssNo()+"| TIN No: "+employee.getTinNo()+"| Pag Ibig No: "+ employee.getPagibigNo()+"| Employee No: "+employee.getEmployeeNo());
+            if (employeeList != null && !employeeList.isEmpty()) {
+                for (Employee employee : employeeList) {
+                    System.out.println("Employee ID: " + employee.getEmployeeNo());
+                    System.out.println("Full Name: " + employee.getLastName() + ", " + employee.getFirstName() + ", " + employee.getMiddleName());
+                    System.out.println("-----------------------------------");
+                }
+            } else {
+                System.out.println("No employee records found.");
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred while viewing all employee: " + e.getMessage());
         }
     }
 
