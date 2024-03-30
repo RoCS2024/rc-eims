@@ -1,71 +1,83 @@
 package com.employee.info.mgmt.data.employee.dao.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.employee.info.mgmt.appl.model.Employee;
+import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-class EmployeeDaoImplTest {
+import java.util.ArrayList;
+import java.util.List;
 
-//    @Mock
-//    private EmployeeDao employeeDao;
-//
-//    @InjectMocks
-//    private EmployeeDaoImpl employeeDaoImpl;
-//
-//    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.initMocks(this);
-//    }
-//
-//    @Test
-//    void testGetAllEmployees() {
-//        List<Employee> employees = new ArrayList<>();
-//        employees.add(new Employee());
-//
-//        when(employeeDao.getAllEmployees()).thenReturn(employees);
-//
-//        List<Employee> result = employeeDaoImpl.getAllEmployees();
-//
-//        assertEquals(1, result.size());
-//        assertEquals("John", result.get(0).getFirstName());
-//        assertEquals("Doe", result.get(0).getLastName());
-//        assertEquals("Engineer", result.get(0).getPositionInRC());
-//    }
-//
-//    @Test
-//    void testGetEmployeeById() {
-//        String employeeId = "EMP-001";
-//        Employee employee = new Employee();
-//        employee.setEmployeeNo(employeeId);
-//
-//        when(employeeDao.getEmployeeById(employeeId)).thenReturn(employee);
-//
-//        Employee result = employeeDaoImpl.getEmployeeById(employeeId);
-//
-//        assertEquals("John", result.getFirstName());
-//        assertEquals("Doe", result.getLastName());
-//        assertEquals("Engineer", result.getPositionInRC());
-//    }
-//
-//    @Test
-//    void testAddEmployee() {
-//        Employee employee = new Employee();
-//
-//        when(employeeDao.addEmployee(employee)).thenReturn(true);
-//
-//        boolean result = employeeDaoImpl.addEmployee(employee);
-//
-//        assertEquals(true, result);
-//    }
-//
-//    @Test
-//    void testUpdateEmployee() {
-//        String employeeId = "EMP-001";
-//        Employee employee = new Employee();
-//        employee.setEmployeeNo(employeeId);
-//
-//        when(employeeDao.updateEmployee(employee)).thenReturn(true);
-//
-//        boolean result = employeeDaoImpl.updateEmployee(employee);
-//
-//        assertEquals(true, result);
-//    }
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+/**
+ * This is to test the employee dao impl.
+ */
+public class EmployeeDaoImplTest {
+    private EmployeeDao employeeDao;
+    private List<Employee> employees;
+
+    @BeforeEach
+    public void setUp() {
+        employees = new ArrayList<>();
+        Employee employee1 = new Employee();
+        Employee employee2 = new Employee();
+        employees.add(employee1);
+        employees.add(employee2);
+
+        employeeDao = mock(EmployeeDao.class);
+    }
+    /**
+     * This is to test get all employees.
+     */
+    @Test
+    public void testGetAllEmployees() {
+        when(employeeDao.getAllEmployees()).thenReturn(employees);
+        List<Employee> employeeList = employeeDao.getAllEmployees();
+        assertEquals(employeeList.size(), 2);
+    }
+
+    /**
+     * This is to test get employee by id.
+     */
+    @Test
+    public void testGetEmployeeByNo() {
+        Employee employee1 = new Employee();
+        employee1.setEmployeeNo("1");
+
+        when(employeeDao.getEmployeeById("1")).thenReturn(employee1);
+
+        Employee expectedEmployee = employeeDao.getEmployeeById("1");
+
+        assertEquals(expectedEmployee, employee1);
+        assertEquals(expectedEmployee.getEmployeeNo(), employee1.getEmployeeNo());
+    }
+
+    @Test
+    public void testAddEmployee() {
+        Employee employee = new Employee();
+        employee.setEmployeeNo("1");
+
+        when(employeeDao.addEmployee(employee)).thenReturn(true);
+        when(employeeDao.getEmployeeById("1")).thenReturn(employee);
+
+        Employee expectedEmployee = employeeDao.getEmployeeById("1");
+        assertEquals(expectedEmployee.getEmployeeNo(), employee.getEmployeeNo());
+    }
+
+    @Test
+    public void testUpdateEmployee() {
+        Employee employee = new Employee();
+        employee.setEmployeeNo("1");
+        employee.setLastName("Dinglasan");
+
+        when(employeeDao.addEmployee(employee)).thenReturn(true);
+        when(employeeDao.updateEmployee(employee)).thenReturn(true);
+        when(employeeDao.getEmployeeById("1")).thenReturn(employee);
+
+        Employee expectedEmployee = employeeDao.getEmployeeById("1");
+        assertEquals(expectedEmployee.getLastName(), employee.getLastName());
+    }
+
 }
