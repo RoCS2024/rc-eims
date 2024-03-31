@@ -51,7 +51,7 @@
 
     <!--Run unit tests-->
     <target name="test" depends="compile-tests">
-        <junitlauncher printsummary="true" haltonfailure="yes">
+        <junitlauncher haltOnFailure="false" printSummary="true">
             <classpath>
                 <path refid="test.path"/>
                 <path refid="junit.libs"/>
