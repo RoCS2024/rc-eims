@@ -299,7 +299,6 @@ public class Main {
         return sssNo;
     }
 
-
     private static String validateTINnoInput() {
         String tinNo;
         Pattern pattern = Pattern.compile("^\\d{3}-\\d{3}-\\d{3}$|^\\d{3}-\\d{3}-\\d{3}-\\d{3}$");
@@ -322,6 +321,7 @@ public class Main {
             pagibigNo = scanner.nextLine().trim();
             matcher = pattern.matcher(pagibigNo);
             if (!matcher.matches()) {
+
                 System.out.print("Invalid PAGIBIG No. Please enter a valid PAGIBIG No in the format XXXX-XXXX-XXXX: ");
             }
         } while (!matcher.matches());
