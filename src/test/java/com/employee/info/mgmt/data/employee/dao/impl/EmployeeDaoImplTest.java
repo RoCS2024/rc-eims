@@ -4,6 +4,7 @@ import com.employee.info.mgmt.appl.model.Employee;
 import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,11 @@ import static org.mockito.Mockito.*;
  * This is to test the employee dao impl.
  */
 public class EmployeeDaoImplTest {
+
+    @Mock
     private EmployeeDao employeeDao;
+
+    @Mock
     private List<Employee> employees;
 
     @BeforeEach

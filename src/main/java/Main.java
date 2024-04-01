@@ -287,27 +287,28 @@ public class Main {
 
     private static String validateSSSnoInput() {
         String sssNo;
-        Pattern pattern = Pattern.compile("^\\d{10}$");
+        Pattern pattern = Pattern.compile("^(\\d{1}-\\d{1}-\\d{7}-\\d{1})|(\\d{2}-\\d{7}-\\d{1})|(\\d{3}-\\d{6}-\\d{1})$");
         Matcher matcher;
         do {
             sssNo = scanner.nextLine().trim();
             matcher = pattern.matcher(sssNo);
             if (!matcher.matches()) {
-                System.out.print("Invalid SSS No. Please enter a valid SSS No: ");
+                System.out.print("Invalid SSS No. Please enter a valid SSS No in the format X-X-XXXXXXX-X or XX-XXXXXXX-X or XXX-XXXXXX-X: ");
             }
         } while (!matcher.matches());
         return sssNo;
     }
 
+
     private static String validateTINnoInput() {
         String tinNo;
-        Pattern pattern = Pattern.compile("^\\d{9}$|^\\d{12}$");
+        Pattern pattern = Pattern.compile("^\\d{3}-\\d{3}-\\d{3}$|^\\d{3}-\\d{3}-\\d{3}-\\d{3}$");
         Matcher matcher;
         do {
             tinNo = scanner.nextLine().trim();
             matcher = pattern.matcher(tinNo);
             if (!matcher.matches()) {
-                System.out.print("Invalid TIN No. Please enter a valid TIN No: ");
+                System.out.print("Invalid TIN No. Please enter a valid TIN No in the format XXX-XXX-XXX or XXX-XXX-XXX-XXX: ");
             }
         } while (!matcher.matches());
         return tinNo;
@@ -315,13 +316,13 @@ public class Main {
 
     private static String validatePAGIBIGnoInput() {
         String pagibigNo;
-        Pattern pattern = Pattern.compile("^\\d{12}$");
+        Pattern pattern = Pattern.compile("^\\d{4}-\\d{4}-\\d{4}$");
         Matcher matcher;
         do {
             pagibigNo = scanner.nextLine().trim();
             matcher = pattern.matcher(pagibigNo);
             if (!matcher.matches()) {
-                System.out.print("Invalid PAGIBIG No. Please enter a valid PAGIBIG No: ");
+                System.out.print("Invalid PAGIBIG No. Please enter a valid PAGIBIG No in the format XXXX-XXXX-XXXX: ");
             }
         } while (!matcher.matches());
         return pagibigNo;
