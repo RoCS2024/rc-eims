@@ -9,9 +9,8 @@ import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
 /**
  * This is to test the employee dao impl.
  */
@@ -42,7 +41,6 @@ public class EmployeeDaoImplTest {
         List<Employee> employeeList = employeeDao.getAllEmployees();
         assertEquals(employeeList.size(), 2);
     }
-
     /**
      * This is to test get employee by id.
      */
@@ -84,5 +82,4 @@ public class EmployeeDaoImplTest {
         Employee expectedEmployee = employeeDao.getEmployeeById("1");
         assertEquals(expectedEmployee.getLastName(), employee.getLastName());
     }
-
 }
