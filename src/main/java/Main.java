@@ -115,11 +115,11 @@ public class Main {
         System.out.print("Email: ");
         employee.setEmail(validateEmailInput());
         System.out.print("SSS Number: ");
-        employee.setSssNo(validateStringInput());
+        employee.setSssNo(validateSSSnoInput());
         System.out.print("TIN Number: ");
-        employee.setTinNo(validateStringInput());
+        employee.setTinNo(validateTINnoInput());
         System.out.print("Pagibig Number: ");
-        employee.setPagibigNo(validateStringInput());
+        employee.setPagibigNo(validatePAGIBIGnoInput());
         System.out.print("Employee Number: ");
         employee.setEmployeeNo(validateStringInput());
         return employee;
@@ -215,15 +215,15 @@ public class Main {
                         break;
                     case 15:
                         System.out.print("Enter new SSS Number: ");
-                        employee.setSssNo(validateStringInput());
+                        employee.setSssNo(validateSSSnoInput());
                         break;
                     case 16:
                         System.out.print("Enter new TIN Number: ");
-                        employee.setTinNo(validateStringInput());
+                        employee.setTinNo(validateTINnoInput());
                         break;
                     case 17:
                         System.out.print("Enter new Pagibig Number: ");
-                        employee.setPagibigNo(validateStringInput());
+                        employee.setPagibigNo(validatePAGIBIGnoInput());
                         break;
 
                     default:
@@ -282,5 +282,49 @@ public class Main {
             }
         } while (!matcher.matches());
         return email;
+    }
+
+
+    private static String validateSSSnoInput() {
+        String sssNo;
+        Pattern pattern = Pattern.compile("^(\\d{1}-\\d{1}-\\d{7}-\\d{1})|(\\d{2}-\\d{7}-\\d{1})|(\\d{3}-\\d{6}-\\d{1})$");
+        Matcher matcher;
+        do {
+            sssNo = scanner.nextLine().trim();
+            matcher = pattern.matcher(sssNo);
+            if (!matcher.matches()) {
+                System.out.print("Invalid SSS No. Please enter a valid SSS No in the format X-X-XXXXXXX-X or XX-XXXXXXX-X or XXX-XXXXXX-X: ");
+            }
+        } while (!matcher.matches());
+        return sssNo;
+    }
+
+    private static String validateTINnoInput() {
+        String tinNo;
+        Pattern pattern = Pattern.compile("^\\d{3}-\\d{3}-\\d{3}$|^\\d{3}-\\d{3}-\\d{3}-\\d{3}$");
+        Matcher matcher;
+        do {
+            tinNo = scanner.nextLine().trim();
+            matcher = pattern.matcher(tinNo);
+            if (!matcher.matches()) {
+                System.out.print("Invalid TIN No. Please enter a valid TIN No in the format XXX-XXX-XXX or XXX-XXX-XXX-XXX: ");
+            }
+        } while (!matcher.matches());
+        return tinNo;
+    }
+
+    private static String validatePAGIBIGnoInput() {
+        String pagibigNo;
+        Pattern pattern = Pattern.compile("^\\d{4}-\\d{4}-\\d{4}$");
+        Matcher matcher;
+        do {
+            pagibigNo = scanner.nextLine().trim();
+            matcher = pattern.matcher(pagibigNo);
+            if (!matcher.matches()) {
+
+                System.out.print("Invalid PAGIBIG No. Please enter a valid PAGIBIG No in the format XXXX-XXXX-XXXX: ");
+            }
+        } while (!matcher.matches());
+        return pagibigNo;
     }
 }
