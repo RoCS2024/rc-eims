@@ -31,9 +31,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public EmployeeDaoImpl() {
     }
 
-    /**
-     * Retrieves all employees from the database.
-     */
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
@@ -57,9 +54,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employees;
     }
 
-    /**
-     * Retrieves an employee from the database based on the given ID.
-     */
+
     @Override
     public Employee getEmployeeById(String id) {
         try {
@@ -78,9 +73,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return null;
     }
 
-    /**
-     * Adds a new employee to the database.
-     */
+
     @Override
     public boolean addEmployee(Employee employee) {
         try {
@@ -116,9 +109,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return false;
     }
 
-    /**
-     * Updates an existing employee record in the database.
-     */
+
     @Override
     public boolean updateEmployee(Employee employee) {
         try {
@@ -152,9 +143,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
-    /**
-     * Helper method to construct an Employee object from a ResultSet.
-     */
+
     private Employee setEmployee(ResultSet rs) {
         try{
             Employee employee = new Employee();
