@@ -1,6 +1,3 @@
-/**
- * An implementation class of the Employee Data Access Object.
- * */
 package com.employee.info.mgmt.data.employee.dao.impl;
 
 import com.employee.info.mgmt.appl.model.Employee;
