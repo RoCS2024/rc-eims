@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
@@ -18,26 +20,37 @@ import static com.employee.info.mgmt.data.utils.QueryConstants.*;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
+    Connection c = ConnectionHelper.getConnection();
+
+    public EmployeeDaoImpl() {
+    }
 
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
-        Connection connection = null;
-        try {
-            connection = ConnectionHelper.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
-            ResultSet rs = stmt.executeQuery();
+        try ( PreparedStatement stmt = c.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
+              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Employee employee = setEmployee(rs);
+                Employee employee = new Employee();
+                employee.setEmployeeNo(rs.getString("employee_no"));
+                employee.setLastName(rs.getString("last_name"));
+                employee.setFirstName(rs.getString("first_name"));
+                employee.setMiddleName(rs.getString("middle_name"));
                 employees.add(employee);
             }
             LOGGER.info("Employee retrieved successfully.");
         } catch (SQLException e) {
             LOGGER.warn("Error retrieving all Employees." + e.getMessage());
             e.printStackTrace();
-        } finally {
-            closeConnection(connection);
+        }finally {
+           try {
+               if (c != null){
+                c.close();
+            }
+        }catch (SQLException e){
+               LOGGER.error("Failed to close connection." + e.getMessage());
+           }
         }
         LOGGER.debug("Employee database is empty.");
         return employees;
@@ -45,10 +58,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeById(String id) {
-        Connection connection = null;
         try {
-            connection = ConnectionHelper.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT);
+            PreparedStatement stmt = c.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT);
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -56,10 +67,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 return setEmployee(rs);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            closeConnection(connection);
+        }finally {
+            try {
+                if (c != null) {
+                    c.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error("Failed to close connection." + e.getMessage());
+            }
         }
         LOGGER.debug("Employee not found.");
         return null;
@@ -67,91 +84,121 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean addEmployee(Employee employee) {
-        Connection connection = null;
         try {
-            connection = ConnectionHelper.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(ADD_EMPLOYEE_STATEMENT);
-            setEmployeeParameters(stmt, employee);
+            PreparedStatement stmt = c.prepareStatement(ADD_EMPLOYEE_STATEMENT);
+            stmt.setString(1, employee.getLastName());
+            stmt.setString(2, employee.getFirstName());
+            stmt.setString(3, employee.getMiddleName());
+            stmt.setString(4, employee.getPositionInRC());
+            stmt.setString(5, employee.getDateEmployed());
+            String birthdateString = employee.getBirthdate();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthdate = sdf.parse(birthdateString);
+            stmt.setDate(6, new java.sql.Date(birthdate.getTime()));
+            stmt.setString(7, employee.getBirthplace());
+            stmt.setString(8, employee.getSex());
+            stmt.setString(9, employee.getCivilStatus());
+            stmt.setString(10, employee.getCitizenship());
+            stmt.setString(11, employee.getReligion());
+            stmt.setDouble(12, employee.getHeight());
+            stmt.setDouble(13, employee.getWeight());
+            stmt.setString(14, employee.getEmail());
+            stmt.setString(15, employee.getSssNo());
+            stmt.setString(16, employee.getTinNo());
+            stmt.setString(17, employee.getPagibigNo());
+            stmt.setString(18, employee.getEmployeeNo());
+
             int result = stmt.executeUpdate();
             return result == 1;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            closeConnection(connection);
+        }finally {
+            try {
+                if (c != null) {
+                    c.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error("Failed to close connection." + e.getMessage());
+            }
         }
         LOGGER.debug("Adding employee failed.");
         return false;
     }
 
     @Override
-    public boolean updateEmployee(Employee employee) {
-        Connection connection = null;
-        try {
-            connection = ConnectionHelper.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(UPDATE_STATEMENT);
-            setEmployeeParameters(stmt, employee);
-            int result = stmt.executeUpdate();
-            return result == 1;
-        } catch (SQLException e) {
-            LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            closeConnection(connection);
-        }
-        LOGGER.debug("Updating employee failed.");
-        return false;
-    }
+    public boolean updateEmployee(Employee employee){
+                try {
+                    PreparedStatement stmt = c.prepareStatement(UPDATE_STATEMENT);
+                    stmt.setString(1, employee.getLastName());
+                    stmt.setString(2, employee.getFirstName());
+                    stmt.setString(3, employee.getMiddleName());
+                    stmt.setString(4, employee.getPositionInRC());
+                    stmt.setString(5, employee.getDateEmployed());
+                    stmt.setString(6, employee.getBirthdate());
+                    stmt.setString(7, employee.getBirthplace());
+                    stmt.setString(8, employee.getSex());
+                    stmt.setString(9, employee.getCivilStatus());
+                    stmt.setString(10, employee.getCitizenship());
+                    stmt.setString(11, employee.getReligion());
+                    stmt.setDouble(12, employee.getHeight());
+                    stmt.setDouble(13, employee.getWeight());
+                    stmt.setString(14, employee.getEmail());
+                    stmt.setString(15, employee.getSssNo());
+                    stmt.setString(16, employee.getTinNo());
+                    stmt.setString(17, employee.getPagibigNo());
+                    stmt.setString(18, employee.getEmployeeNo());
 
-    private void setEmployeeParameters(PreparedStatement stmt, Employee employee) throws SQLException {
-        stmt.setString(1, employee.getLastName());
-        stmt.setString(2, employee.getFirstName());
-        stmt.setString(3, employee.getMiddleName());
-        stmt.setString(4, employee.getPositionInRC());
-        stmt.setString(5, employee.getDateEmployed());
-        stmt.setDate(6, java.sql.Date.valueOf(employee.getBirthdate()));
-        stmt.setString(7, employee.getBirthplace());
-        stmt.setString(8, employee.getSex());
-        stmt.setString(9, employee.getCivilStatus());
-        stmt.setString(10, employee.getCitizenship());
-        stmt.setString(11, employee.getReligion());
-        stmt.setDouble(12, employee.getHeight());
-        stmt.setDouble(13, employee.getWeight());
-        stmt.setString(14, employee.getEmail());
-        stmt.setString(15, employee.getSssNo());
-        stmt.setString(16, employee.getTinNo());
-        stmt.setString(17, employee.getPagibigNo());
-        stmt.setString(18, employee.getEmployeeNo());
-    }
+                    int result = stmt.executeUpdate();
+                    return result == 1;
+                } catch (Exception e) {
+                    LOGGER.error("An SQL Exception occurred." + e.getMessage());
+                } finally {
+                    try {
+                        if (c != null) {
+                            c.close();
+                        }
+                    } catch (SQLException e) {
+                        LOGGER.error("Failed to close connection." + e.getMessage());
+                    }
+                }
+                    LOGGER.debug("Updating employee failed.");
+                    return false;
+                }
 
-    private Employee setEmployee(ResultSet rs) throws SQLException {
-        Employee employee = new Employee();
-        employee.setEmployeeNo(rs.getString("employee_no"));
-        employee.setLastName(rs.getString("last_name"));
-        employee.setFirstName(rs.getString("first_name"));
-        employee.setMiddleName(rs.getString("middle_name"));
-        employee.setPositionInRC(rs.getString("position_in_rc"));
-        employee.setDateEmployed(rs.getString("date_employed"));
-        employee.setBirthdate(rs.getString("birthdate"));
-        employee.setBirthplace(rs.getString("birthplace"));
-        employee.setSex(rs.getString("sex"));
-        employee.setCivilStatus(rs.getString("civil_status"));
-        employee.setCitizenship(rs.getString("citizenship"));
-        employee.setReligion(rs.getString("religion"));
-        employee.setHeight(rs.getDouble("height"));
-        employee.setWeight(rs.getDouble("weight"));
-        employee.setEmail(rs.getString("email"));
-        employee.setSssNo(rs.getString("sss_no"));
-        employee.setTinNo(rs.getString("tin_no"));
-        employee.setPagibigNo(rs.getString("pagibig_no"));
-        return employee;
-    }
-
-    private void closeConnection(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Error closing connection: " + e.getMessage());
+                private Employee setEmployee (ResultSet rs){
+                    try {
+                        Employee employee = new Employee();
+                        employee.setLastName(rs.getString("last_name"));
+                        employee.setFirstName(rs.getString("first_name"));
+                        employee.setMiddleName(rs.getString("middle_name"));
+                        employee.setPositionInRC(rs.getString("position_in_rc"));
+                        employee.setDateEmployed(rs.getString("date_employed"));
+                        employee.setBirthdate(rs.getString("birthdate"));
+                        employee.setBirthplace(rs.getString("birthplace"));
+                        employee.setSex(rs.getString("sex"));
+                        employee.setCivilStatus(rs.getString("civil_status"));
+                        employee.setCitizenship(rs.getString("citizenship"));
+                        employee.setReligion(rs.getString("religion"));
+                        employee.setHeight(Double.parseDouble(rs.getString("height")));
+                        employee.setWeight(Double.parseDouble(rs.getString("weight")));
+                        employee.setEmail(rs.getString("email"));
+                        employee.setSssNo(rs.getString("sss_no"));
+                        employee.setTinNo(rs.getString("tin_no"));
+                        employee.setPagibigNo(rs.getString("pagibig_no"));
+                        employee.setEmployeeNo(rs.getString("employee_no"));
+                        return employee;
+                    } catch (Exception e) {
+                        LOGGER.error("An SQL Exception occurred." + e.getMessage());
+                    } finally {
+                        try {
+                            if (c != null) {
+                                c.close();
+                            }
+                        } catch (SQLException e) {
+                            LOGGER.error("Failed to close connection." + e.getMessage());
+                        }
+                    }
+                    LOGGER.debug("No employee was set.");
+                    return null;
+                }
             }
-        }
-    }
-}
