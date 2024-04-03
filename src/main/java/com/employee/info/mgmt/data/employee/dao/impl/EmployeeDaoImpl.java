@@ -20,16 +20,16 @@ import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
 
+/**
+ * The EmployeeDaoImpl class implements the EmployeeDao interface
+ * it provides methods for interacting with the employee database.
+ * It includes methods for retrieving, adding, and updating employee records.
+ */
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
     Connection c = ConnectionHelper.getConnection();
 
-    /**
-     * Constructs a new EmployeeDaoImpl object.
-     * This class is an implementation of the EmployeeDao interface,
-     * provides methods to interact with the database for employee related functions/operations.
-     *  */
     public EmployeeDaoImpl() {
     }
 
