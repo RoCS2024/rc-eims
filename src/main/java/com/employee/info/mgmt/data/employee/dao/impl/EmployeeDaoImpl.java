@@ -20,10 +20,6 @@ import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
 
-/**
- * The EmployeeDaoImpl class implements the EmployeeDao interface and provides methods
- * to interact with the database for employee-related operations.
- */
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
