@@ -1,48 +1,41 @@
 package com.employee.info.mgmt.data.connection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.sql.SQLException;
 
+/**
+ * The ConnectionHelper class connects to an Oracle database.
+ */
 public class ConnectionHelper {
-    private static final Logger logger = LogManager.getLogger(ConnectionHelper.class);
-
-    /**
-     * Database URL
-     */
-    public static final String URL = "jdbc:oracle:thin:@localhost:1521:rogate";
-
-    /**
-     * Oracle JDBC Driver
-     */
+    /** The connection URL. */
+    public static final String URL = "jdbc:oracle:thin:@localhost:1521:oracleDB";
+    /** The Oracle driver. */
     public static final String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
-
-    /**
-     * Database username
-     */
+    /** The username used to connect to the database. */
     public static final String username = "system";
-
-    /**
-     * Database password
-     */
+    /** The password used to connect to the database. */
     public static final String password = "Changeme0";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionHelper.class);
+
     /**
-     * Establishes a connection to the database.
-     *
-     * @return Connection object
-     * @throws RuntimeException if there is an error connecting to the database
-     */
-    public static Connection getConnection() {
+     * This method gets the connection from an Oracle database instance.
+     * */
+    public static Connection getConnection() throws RuntimeException {
         try {
             Class.forName(ORACLE_DRIVER).newInstance();
-            Connection connection = DriverManager.getConnection(URL, username, password);
-            logger.info("Connection established successfully");
-            return connection;
-        } catch (Exception e) {
-            logger.error("Error connecting to the database", e);
-            throw new RuntimeException("Error connecting to the database", e);
+            return DriverManager.getConnection(URL, username, password);
+        } catch (ClassNotFoundException ex) {
+            LOGGER.error("Error has occurred. Driver not found." + ex.getMessage());
+        } catch (InstantiationException | IllegalAccessException ex) {
+            LOGGER.error("Error has occurred. Cannot create a database instance." + ex.getMessage());
+        } catch (SQLException ex) {
+            LOGGER.error("Error has occurred. Cannot connect to the database." + ex.getMessage());
         }
+        return null;
     }
 }
