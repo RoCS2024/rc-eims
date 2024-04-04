@@ -74,11 +74,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
             stmt.setString(4, employee.getPositionInRC());
-            stmt.setString(5, employee.getDateEmployed());
-            String birthdateString = employee.getBirthdate();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date birthdate = sdf.parse(birthdateString);
-            stmt.setDate(6, new java.sql.Date(birthdate.getTime()));
+            stmt.setTimestamp(5, employee.getDateEmployed());
+            stmt.setTimestamp(6, employee.getBirthdate());
             stmt.setString(7, employee.getBirthplace());
             stmt.setString(8, employee.getSex());
             stmt.setString(9, employee.getCivilStatus());
@@ -109,8 +106,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
             stmt.setString(4, employee.getPositionInRC());
-            stmt.setString(5, employee.getDateEmployed());
-            stmt.setString(6, employee.getBirthdate());
+            stmt.setTimestamp(5, employee.getDateEmployed());
+            stmt.setTimestamp(6, employee.getBirthdate());
             stmt.setString(7, employee.getBirthplace());
             stmt.setString(8, employee.getSex());
             stmt.setString(9, employee.getCivilStatus());
@@ -140,8 +137,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
             employee.setFirstName(rs.getString("first_name"));
             employee.setMiddleName(rs.getString("middle_name"));
             employee.setPositionInRC(rs.getString("position_in_rc"));
-            employee.setDateEmployed(rs.getString("date_employed"));
-            employee.setBirthdate(rs.getString("birthdate"));
+            employee.setDateEmployed(rs.getTimestamp("date_employed"));
+            employee.setBirthdate(rs.getTimestamp("birthdate"));
             employee.setBirthplace(rs.getString("birthplace"));
             employee.setSex(rs.getString("sex"));
             employee.setCivilStatus(rs.getString("civil_status"));
