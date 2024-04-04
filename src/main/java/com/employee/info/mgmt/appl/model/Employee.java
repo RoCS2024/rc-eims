@@ -1,12 +1,18 @@
 package com.employee.info.mgmt.appl.model;
 
+import java.sql.Timestamp;
+
+    /**
+    * Employee model
+    */
+
 public class Employee {
     private String lastName;
     private String firstName;
     private String middleName;
     private String positionInRC;
-    private String dateEmployed;
-    private String birthdate;
+    private Timestamp dateEmployed;
+    private Timestamp birthdate;
     private String birthplace;
     private String sex;
     private String civilStatus;
@@ -23,7 +29,7 @@ public class Employee {
     public Employee(){
 
     }
-    public Employee(String lastName, String firstName, String middleName, String positionInRC, String dateEmployed, String birthdate, String birthplace, String sex, String civilStatus, String citizenship, String religion, String height, String weight, String email, String sssNo, String tinNo, String pagibigNo, String employeeNo){
+    public Employee(String lastName, String firstName, String middleName, String positionInRC, Timestamp dateEmployed, Timestamp birthdate, String birthplace, String sex, String civilStatus, String citizenship, String religion, String height, String weight, String email, String sssNo, String tinNo, String pagibigNo, String employeeNo){
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -43,6 +49,10 @@ public class Employee {
         this.pagibigNo = pagibigNo;
         this.employeeNo = employeeNo;
     }
+
+    /**
+     * Getters and Setters for properties
+     */
 
 
 
@@ -78,19 +88,19 @@ public class Employee {
         this.positionInRC = positionInRC;
     }
 
-    public String getDateEmployed() {
+    public Timestamp getDateEmployed() {
         return dateEmployed;
     }
 
-    public void setDateEmployed(String dateEmployed) {
+    public void setDateEmployed(Timestamp dateEmployed) {
         this.dateEmployed = dateEmployed;
     }
 
-    public String getBirthdate() {
+    public Timestamp getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Timestamp birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -190,5 +200,8 @@ public class Employee {
         this.employeeNo = employeeNo;
     }
 
+/**
+ * Validation for employee no. should have a pattern.
+ */
 
 }
