@@ -3,12 +3,21 @@ package com.employee.info.mgmt.appl.facade.employee.impl;
 import com.employee.info.mgmt.appl.facade.employee.EmployeeFacade;
 import com.employee.info.mgmt.appl.model.Employee;
 import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
-import com.employee.info.mgmt.data.employee.dao.impl.EmployeeDaoImpl;
 
 import java.util.List;
 
+/**
+ * This is the implementation class for the EmployeeFacade
+ */
+
 public class EmployeeFacadeImpl implements EmployeeFacade {
-    EmployeeDao employeeDao = new EmployeeDaoImpl();
+
+    private final EmployeeDao employeeDao;
+
+    public EmployeeFacadeImpl(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
+
 
     @Override
     public List<Employee> getAllEmployees() {
