@@ -1,6 +1,5 @@
 package com.employee.info.mgmt.appl.facade.employee.impl;
 
-import com.employee.info.mgmt.appl.facade.employee.EmployeeFacade;
 import com.employee.info.mgmt.appl.model.Employee;
 import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +19,7 @@ class EmployeeFacadeImplTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeFacadeImplTest.class);
 
     @InjectMocks
-    private EmployeeFacade employeeFacade = new EmployeeFacadeImpl();
+    private EmployeeFacadeImpl employeeFacade;
 
     @Mock
     private EmployeeDao employeeDao;
@@ -37,6 +36,7 @@ class EmployeeFacadeImplTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        employeeFacade = new EmployeeFacadeImpl(employeeDao);
         employee.setEmployeeNo("1");
         addEmployee.setEmployeeNo("2");
         when(employeeDao.getAllEmployees()).thenReturn(employeeList);
