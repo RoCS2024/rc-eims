@@ -24,7 +24,7 @@ import static com.employee.info.mgmt.data.utils.QueryConstants.*;
  */
 public class EmployeeDaoImpl implements EmployeeDao {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
     Connection c = ConnectionHelper.getConnection();
 
     public EmployeeDaoImpl() {
@@ -35,7 +35,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         List<Employee> employees = new ArrayList<>();
         try (Connection connection = ConnectionHelper.getConnection();
              PreparedStatement stmt = connection.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
-             ResultSet rs = stmt.executeQuery()){
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Employee employee = new Employee();
@@ -49,14 +49,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } catch (SQLException e) {
             LOGGER.warn("Error retrieving all Employees." + e.getMessage());
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if (c != null){
+                if (c != null) {
                     c.close();
                 }
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 LOGGER.error("Failed to close connection." + e.getMessage());
             }
+
+            try {
+                if (c != null) {
+                    c.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error("Failed to close connection." + e.getMessage());
+            }
+
         }
         LOGGER.debug("Employee database is empty.");
         return employees;
@@ -76,7 +85,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             }
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        }finally {
+        } finally {
             try {
                 if (c != null) {
                     c.close();
@@ -120,7 +129,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return result == 1;
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        }finally {
+        } finally {
             try {
                 if (c != null) {
                     c.close();
@@ -137,7 +146,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public boolean updateEmployee(Employee employee) {
         try (Connection connection = ConnectionHelper.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(UPDATE_STATEMENT)){
+             PreparedStatement stmt = connection.prepareStatement(UPDATE_STATEMENT)) {
             stmt.setString(1, employee.getLastName());
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
@@ -161,7 +170,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return result == 1;
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        }finally {
+        } finally {
             try {
                 if (c != null) {
                     c.close();
@@ -175,9 +184,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
-
     private Employee setEmployee(ResultSet rs) {
-        try{
+        try {
             Employee employee = new Employee();
             employee.setLastName(rs.getString("last_name"));
             employee.setFirstName(rs.getString("first_name"));
@@ -200,7 +208,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return employee;
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        }finally {
+        } finally {
             try {
                 if (c != null) {
                     c.close();
@@ -213,3 +221,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return null;
     }
 }
+
+
+
