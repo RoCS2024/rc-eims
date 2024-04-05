@@ -25,17 +25,19 @@ import static com.employee.info.mgmt.data.utils.QueryConstants.*;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
-    Connection c = ConnectionHelper.getConnection();
 
+    /**
+     * Constructor for EmployeeDaoImpl.
+     * */
     public EmployeeDaoImpl() {
     }
 
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
-        try (Connection connection = ConnectionHelper.getConnection();
+        try (Connection connection = ConnectionHelper.getConnection()){
              PreparedStatement stmt = connection.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
-             ResultSet rs = stmt.executeQuery()) {
+             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Employee employee = new Employee();
@@ -49,23 +51,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } catch (SQLException e) {
             LOGGER.warn("Error retrieving all Employees." + e.getMessage());
             e.printStackTrace();
-        } finally {
-            try {
-                if (c != null) {
-                    c.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error("Failed to close connection." + e.getMessage());
-            }
-
-            try {
-                if (c != null) {
-                    c.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error("Failed to close connection." + e.getMessage());
-            }
-
         }
         LOGGER.debug("Employee database is empty.");
         return employees;
@@ -74,10 +59,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeById(String id) {
-        try (Connection connection = ConnectionHelper.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT)) {
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT);
             stmt.setString(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
+            try (ResultSet rs = stmt.executeQuery()){
                 if (rs.next()) {
                     LOGGER.debug("Employee retrieved successfully.");
                     return setEmployee(rs);
@@ -85,14 +70,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             }
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            try {
-                if (c != null) {
-                    c.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error("Failed to close connection." + e.getMessage());
-            }
         }
         LOGGER.debug("Employee not found.");
         return null;
@@ -101,8 +78,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean addEmployee(Employee employee) {
-        try (Connection connection = ConnectionHelper.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(ADD_EMPLOYEE_STATEMENT)) {
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(ADD_EMPLOYEE_STATEMENT);
             stmt.setString(1, employee.getLastName());
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
@@ -129,14 +106,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return result == 1;
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            try {
-                if (c != null) {
-                    c.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error("Failed to close connection." + e.getMessage());
-            }
         }
         LOGGER.debug("Adding employee failed.");
         return false;
@@ -145,8 +114,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        try (Connection connection = ConnectionHelper.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(UPDATE_STATEMENT)) {
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(UPDATE_STATEMENT);
             stmt.setString(1, employee.getLastName());
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
@@ -170,14 +139,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return result == 1;
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            try {
-                if (c != null) {
-                    c.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error("Failed to close connection." + e.getMessage());
-            }
         }
         LOGGER.debug("Updating employee failed.");
         return false;
@@ -208,14 +169,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return employee;
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
-        } finally {
-            try {
-                if (c != null) {
-                    c.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error("Failed to close connection." + e.getMessage());
-            }
         }
         LOGGER.debug("No employee was set.");
         return null;
