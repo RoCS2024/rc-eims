@@ -24,17 +24,20 @@ import static com.employee.info.mgmt.data.utils.QueryConstants.*;
  */
 public class EmployeeDaoImpl implements EmployeeDao {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
-    Connection c = ConnectionHelper.getConnection();
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
 
+    /**
+     * Constructor for EmployeeDaoImpl.
+     * */
     public EmployeeDaoImpl() {
     }
 
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
-        try ( PreparedStatement stmt = c.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
-              ResultSet rs = stmt.executeQuery()) {
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
+             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Employee employee = new Employee();
@@ -56,15 +59,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeById(String id) {
-        try {
-            PreparedStatement stmt = c.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT);
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(GET_EMPLOYEE_BY_ID_STATEMENT);
             stmt.setString(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                LOGGER.debug("Employee retrieved successfully.");
-                return setEmployee(rs);
+            try (ResultSet rs = stmt.executeQuery()){
+                if (rs.next()) {
+                    LOGGER.debug("Employee retrieved successfully.");
+                    return setEmployee(rs);
+                }
             }
-
         } catch (Exception e) {
             LOGGER.error("An SQL Exception occurred." + e.getMessage());
         }
@@ -75,8 +78,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean addEmployee(Employee employee) {
-        try {
-            PreparedStatement stmt = c.prepareStatement(ADD_EMPLOYEE_STATEMENT);
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(ADD_EMPLOYEE_STATEMENT);
             stmt.setString(1, employee.getLastName());
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
@@ -111,8 +114,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        try {
-            PreparedStatement stmt = c.prepareStatement(UPDATE_STATEMENT);
+        try (Connection connection = ConnectionHelper.getConnection()){
+             PreparedStatement stmt = connection.prepareStatement(UPDATE_STATEMENT);
             stmt.setString(1, employee.getLastName());
             stmt.setString(2, employee.getFirstName());
             stmt.setString(3, employee.getMiddleName());
@@ -142,9 +145,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
-
     private Employee setEmployee(ResultSet rs) {
-        try{
+        try {
             Employee employee = new Employee();
             employee.setLastName(rs.getString("last_name"));
             employee.setFirstName(rs.getString("first_name"));
@@ -172,3 +174,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return null;
     }
 }
+
+
+
