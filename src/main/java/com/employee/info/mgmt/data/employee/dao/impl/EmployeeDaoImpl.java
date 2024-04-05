@@ -17,6 +17,11 @@ import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
 
+/**
+ * The EmployeeDaoImpl class implements the EmployeeDao interface
+ * it provides methods for interacting with the employee database.
+ * It includes methods for retrieving, adding, and updating employee records.
+ */
 public class EmployeeDaoImpl implements EmployeeDao {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
@@ -48,6 +53,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employees;
     }
 
+
     @Override
     public Employee getEmployeeById(String id) {
         try {
@@ -65,6 +71,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         LOGGER.debug("Employee not found.");
         return null;
     }
+
 
     @Override
     public boolean addEmployee(Employee employee) {
@@ -101,6 +108,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return false;
     }
 
+
     @Override
     public boolean updateEmployee(Employee employee) {
         try {
@@ -132,6 +140,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
         LOGGER.debug("Updating employee failed.");
         return false;
     }
+
+
 
     private Employee setEmployee(ResultSet rs) {
         try{
