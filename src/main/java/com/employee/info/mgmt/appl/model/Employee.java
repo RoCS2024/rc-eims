@@ -35,48 +35,102 @@ public class Employee {
     }
 
     public Employee(String lastName, String firstName, String middleName, String positionInRC, Timestamp dateEmployed, Timestamp birthdate, String birthplace, String sex, String civilStatus, String citizenship, String religion, String height, String weight, String email, String sssNo, String tinNo, String pagibigNo, String employeeNo){
-        
+
         /**
          * Constructor for Employee with parameters.
-         *
+         */
+        
+        
+        /**
          * @param lastName Last name of the employee.
+         */
+        this.lastName = lastName;
+        
+        /**
          * @param firstName First name of the employee.
+         */
+        this.firstName = firstName;
+        
+        /**
          * @param middleName Middle name of the employee.
+         */
+        this.middleName = middleName;
+        
+        /**
          * @param positionInRC Position of the employee in the organization.
+         */
+        this.positionInRC = positionInRC;
+        
+        /**
          * @param dateEmployed Date when the employee was employed.
+         */
+        this.dateEmployed = dateEmployed;
+        
+        /**
          * @param birthdate Birthdate of the employee.
-         * @param birthplace Birthplace of the employee.
+         */
+        this.birthdate = birthdate;
+        
+        /**
+         * @param lastName Last name of the employee.
+         */
+        this.birthplace = birthplace;
+        
+        /**
          * @param sex Gender of the employee.
+         */
+        this.sex = sex;
+        
+        /**
          * @param civilStatus Civil status of the employee.
+         */
+        this.civilStatus = civilStatus;
+        
+        /**
          * @param citizenship Citizenship of the employee.
+         */
+        this.citizenship = citizenship;
+        
+        /**
          * @param religion Religion of the employee.
+         */
+        this.religion = religion;
+        
+        /**
          * @param height Height of the employee (in meters).
+         */
+        this.height = Double.parseDouble(height);
+        
+        /**
          * @param weight Weight of the employee (in kilograms).
+         */
+        this.weight = Double.parseDouble(weight);
+        
+        /**
          * @param email Email address of the employee.
+         */
+        this.email = email;
+        
+        /**
          * @param sssNo Social Security System (SSS) number of the employee.
+         */
+        this.sssNo = sssNo;
+        
+        /**
          * @param tinNo Tax Identification Number (TIN) of the employee.
+         */
+        this.tinNo = tinNo;
+        
+        /**
          * @param pagibigNo Pag-IBIG Fund number of the employee.
+         */
+        this.pagibigNo = pagibigNo;
+        
+        /**
          * @param employeeNo Employee number of the employee.
          */
-
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.positionInRC = positionInRC;
-        this.dateEmployed = dateEmployed;
-        this.birthdate = birthdate;
-        this.birthplace = birthplace;
-        this.sex = sex;
-        this.civilStatus = civilStatus;
-        this.citizenship = citizenship;
-        this.religion = religion;
-        this.height = Double.parseDouble(height);
-        this.weight = Double.parseDouble(weight);
-        this.email = email;
-        this.sssNo = sssNo;
-        this.tinNo = tinNo;
-        this.pagibigNo = pagibigNo;
         this.employeeNo = employeeNo;
+
     }
 
     /**
