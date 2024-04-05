@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Main {
 
-    private static EmployeeFacade employeeFacade = new EmployeeFacadeImpl();
+    private static EmployeeFacade employeeFacade;
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
