@@ -3,7 +3,7 @@ package com.employee.info.mgmt.appl.model;
 import java.sql.Timestamp;
 
 /**
- * Employee model class.
+ * Employee model class representing employee information.
  */
 
 public class Employee {
@@ -27,18 +27,38 @@ public class Employee {
     private String employeeNo;
 
     /**
-     * Constructor for Employee.
+     * Default constructor for Employee.
      */
 
     public Employee(){
 
     }
 
-    /**
-     * Constructor for Employee with parameters.
-     */
-
     public Employee(String lastName, String firstName, String middleName, String positionInRC, Timestamp dateEmployed, Timestamp birthdate, String birthplace, String sex, String civilStatus, String citizenship, String religion, String height, String weight, String email, String sssNo, String tinNo, String pagibigNo, String employeeNo){
+        
+        /**
+         * Constructor for Employee with parameters.
+         *
+         * @param lastName Last name of the employee.
+         * @param firstName First name of the employee.
+         * @param middleName Middle name of the employee.
+         * @param positionInRC Position of the employee in the organization.
+         * @param dateEmployed Date when the employee was employed.
+         * @param birthdate Birthdate of the employee.
+         * @param birthplace Birthplace of the employee.
+         * @param sex Gender of the employee.
+         * @param civilStatus Civil status of the employee.
+         * @param citizenship Citizenship of the employee.
+         * @param religion Religion of the employee.
+         * @param height Height of the employee (in meters).
+         * @param weight Weight of the employee (in kilograms).
+         * @param email Email address of the employee.
+         * @param sssNo Social Security System (SSS) number of the employee.
+         * @param tinNo Tax Identification Number (TIN) of the employee.
+         * @param pagibigNo Pag-IBIG Fund number of the employee.
+         * @param employeeNo Employee number of the employee.
+         */
+
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
