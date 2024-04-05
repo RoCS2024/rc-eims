@@ -1,6 +1,8 @@
 import com.employee.info.mgmt.appl.facade.employee.EmployeeFacade;
 import com.employee.info.mgmt.appl.facade.employee.impl.EmployeeFacadeImpl;
 import com.employee.info.mgmt.appl.model.Employee;
+import com.employee.info.mgmt.data.employee.dao.EmployeeDao;
+import com.employee.info.mgmt.data.employee.dao.impl.EmployeeDaoImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +15,10 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        employeeFacade = new EmployeeFacadeImpl(employeeDao);
+
         int choice;
         do {
             displayMenu();

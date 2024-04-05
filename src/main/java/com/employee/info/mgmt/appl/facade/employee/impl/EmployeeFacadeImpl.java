@@ -12,7 +12,12 @@ import java.util.List;
 
 public class EmployeeFacadeImpl implements EmployeeFacade {
 
-    private final EmployeeDao employeeDao;
+    private EmployeeDao employeeDao;
+
+    /**
+     * This creates a new EmployeeFacadeImpl
+     * @param employeeDao this helps for managing employee data.
+     */
 
     public EmployeeFacadeImpl(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
