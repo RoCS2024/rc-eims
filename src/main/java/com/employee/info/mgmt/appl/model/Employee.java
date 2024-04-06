@@ -415,15 +415,11 @@ public class Employee {
 
     /**
      * Set the employee number of the employee.
+     * Validation for employee no. should have a pattern.
      * @param employeeNo The employee number of the employee.
+     * @return true if the employee number is valid, false otherwise.
      */
     public void setEmployeeNo(String employeeNo) {
         this.employeeNo = employeeNo;
     }
-
-/**
- * Validation for employee no. should have a pattern.
- * @return true if the employee number is valid, false otherwise.
- */
-
 }
