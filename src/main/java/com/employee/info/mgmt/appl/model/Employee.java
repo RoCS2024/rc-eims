@@ -34,6 +34,7 @@ public class Employee {
 
     }
 
+<<<<<<< HEAD
     /**
      * Get the last name of the employee.
      * @return The last name of the employee.
@@ -41,6 +42,8 @@ public class Employee {
     public String getLastName() {
         return lastName;
     }
+=======
+>>>>>>> c893c9d0a3ce81afc2dcdfa8b699cca359d83929
 
     /**
      * Set the last name of the employee.
