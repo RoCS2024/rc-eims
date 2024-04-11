@@ -118,11 +118,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setString(3, employee.getMiddleName());
             stmt.setString(4, employee.getPositionInRC());
             stmt.setTimestamp(5, employee.getDateEmployed());
-<<<<<<< HEAD
             stmt.setTimestamp(6, employee.getBirthdate());;
-=======
             stmt.setTimestamp(6, employee.getBirthdate());
->>>>>>> c893c9d0a3ce81afc2dcdfa8b699cca359d83929
             stmt.setString(7, employee.getBirthplace());
             stmt.setString(8, employee.getSex());
             stmt.setString(9, employee.getCivilStatus());
