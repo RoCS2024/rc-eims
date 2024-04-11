@@ -6,6 +6,7 @@ import com.employee.info.mgmt.data.employee.dao.impl.EmployeeDaoImpl;
 
 import java.util.List;
 import java.util.Scanner;
+import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,10 +101,10 @@ public class Main {
         employee.setMiddleName(validateStringInput());
         System.out.print("Enter Position in RC: ");
         employee.setPositionInRC(validateStringInput());
-        System.out.print("Enter Date Employed: ");
-        employee.setDateEmployed(validateStringInput());
-        System.out.print("Birthdate (yyyy-mm-dd hh:mm:ss): ");
-        employee.setBirthdate(validateStringInput());
+        System.out.print("Enter Date Employed (yyyy-mm-dd hh:mm:ss): ");
+        employee.setDateEmployed(validateTimestampInput());
+        System.out.print("Enter Birthdate (yyyy-mm-dd hh:mm:ss): ");
+        employee.setBirthdate(validateTimestampInput());
         System.out.print("Birthplace: ");
         employee.setBirthplace(validateStringInput());
         System.out.print("Sex: ");
@@ -181,11 +182,11 @@ public class Main {
                         break;
                     case 5:
                         System.out.print("Enter new Date Employed: ");
-                        employee.setDateEmployed(validateStringInput());
+                        employee.setDateEmployed(Timestamp.valueOf(validateStringInput()));
                         break;
                     case 6:
                         System.out.print("Enter new Birthdate: ");
-                        employee.setBirthdate(validateStringInput());
+                        employee.setBirthdate(Timestamp.valueOf(validateStringInput()));
                         break;
                     case 7:
                         System.out.print("Enter new Birthplace: ");
@@ -243,9 +244,9 @@ public class Main {
                 } else {
                     System.out.println("Failed to update employee.");
                 }
-                } else {
+            } else {
                 System.out.println("Employee not found.");
-                }
+            }
         } catch (Exception e) {
             System.out.println("Error updating employee: " + e.getMessage());
         }
@@ -332,5 +333,20 @@ public class Main {
             }
         } while (!matcher.matches());
         return pagibigNo;
+    }
+
+    private static Timestamp validateTimestampInput() {
+        Timestamp timestamp = null;
+        boolean valid = false;
+        do {
+            String input = scanner.nextLine().trim();
+            try {
+                timestamp = Timestamp.valueOf(input);
+                valid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid timestamp format. Please enter in the format yyyy-mm-dd hh:mm:ss: ");
+            }
+        } while (!valid);
+        return timestamp;
     }
 }
