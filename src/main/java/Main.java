@@ -182,11 +182,11 @@ public class Main {
                         break;
                     case 5:
                         System.out.print("Enter new Date Employed: ");
-                        employee.setDateEmployed(Timestamp.valueOf(validateStringInput()));
+                        employee.setDateEmployed(validateTimestampInput());
                         break;
                     case 6:
                         System.out.print("Enter new Birthdate: ");
-                        employee.setBirthdate(Timestamp.valueOf(validateStringInput()));
+                        employee.setBirthdate(validateTimestampInput());
                         break;
                     case 7:
                         System.out.print("Enter new Birthplace: ");

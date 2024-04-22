@@ -10,10 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
@@ -32,8 +31,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * */
     public EmployeeDaoImpl() {
     }
-
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public List<Employee> getAllEmployees() {
