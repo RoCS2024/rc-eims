@@ -10,9 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import static com.employee.info.mgmt.data.utils.QueryConstants.*;
@@ -35,6 +35,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
+
         try (Connection connection = ConnectionHelper.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(GET_ALL_EMPLOYEE_STATEMENT);
             ResultSet rs = stmt.executeQuery();
@@ -45,6 +46,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employee.setLastName(rs.getString("last_name"));
                 employee.setFirstName(rs.getString("first_name"));
                 employee.setMiddleName(rs.getString("middle_name"));
+                employee.setPositionInRC(rs.getString("position_in_rc"));
+                employee.setDateEmployed(rs.getTimestamp("date_employed"));
+                employee.setBirthdate(rs.getTimestamp("birthdate"));
+                employee.setBirthplace(rs.getString("birthplace"));
+                employee.setSex(rs.getString("sex"));
+                employee.setCivilStatus(rs.getString("civil_status"));
+                employee.setCitizenship(rs.getString("citizenship"));
+                employee.setReligion(rs.getString("religion"));
+                employee.setHeight(rs.getDouble("height"));
+                employee.setWeight(rs.getDouble("weight"));
+                employee.setEmail(rs.getString("email"));
+                employee.setSssNo(rs.getString("sss_no"));
+                employee.setTinNo(rs.getString("tin_no"));
+                employee.setPagibigNo(rs.getString("pagibig_no"));
                 employees.add(employee);
             }
             LOGGER.info("Employee retrieved successfully.");
@@ -118,7 +133,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setString(3, employee.getMiddleName());
             stmt.setString(4, employee.getPositionInRC());
             stmt.setTimestamp(5, employee.getDateEmployed());
-            stmt.setTimestamp(6, employee.getBirthdate());;
             stmt.setTimestamp(6, employee.getBirthdate());
             stmt.setString(7, employee.getBirthplace());
             stmt.setString(8, employee.getSex());
