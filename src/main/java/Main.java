@@ -12,13 +12,14 @@ import java.util.regex.Pattern;
 
 public class Main {
 
-    private static EmployeeFacade employeeFacade;
+    private static final EmployeeInfoMgtApplication app = new EmployeeInfoMgtApplication();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
-        employeeFacade = new EmployeeFacadeImpl(employeeDao);
+        EmployeeInfoMgtApplication app = new EmployeeInfoMgtApplication();
+
+        EmployeeFacade employeeFacade = app.getEmployeeFacade();
 
         int choice;
         do {
@@ -59,6 +60,7 @@ public class Main {
     }
 
     private static void viewAllEmployees() {
+        EmployeeFacade employeeFacade = app.getEmployeeFacade();
         System.out.println("Showing all Employees ...");
         try {
             List<Employee> employeeList = employeeFacade.getAllEmployees();
@@ -78,6 +80,7 @@ public class Main {
     }
 
     private static void addEmployee() {
+        EmployeeFacade employeeFacade = app.getEmployeeFacade();
         try {
             Employee employee = getEmployeeDetailsFromUser();
             boolean result = employeeFacade.addEmployee(employee);
@@ -133,6 +136,7 @@ public class Main {
     }
 
     private static void updateEmployee() {
+        EmployeeFacade employeeFacade = app.getEmployeeFacade();
         try {
             System.out.print("Enter employee ID to update: ");
             String employeeId = scanner.nextLine();
