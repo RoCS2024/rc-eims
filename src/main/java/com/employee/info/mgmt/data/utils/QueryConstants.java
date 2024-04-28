@@ -4,7 +4,7 @@ package com.employee.info.mgmt.data.utils;
  * Inside the QueryConstants class contains constants representing SQL queries for managing employee information.
  */
 
-public class QueryConstants {
+public final class QueryConstants {
 
     /**
      * SQL query to retrieves all employees from the database.

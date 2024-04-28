@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * This is the implementation class for the EmployeeFacade
  */
-
 public class EmployeeFacadeImpl implements EmployeeFacade {
 
     private EmployeeDao employeeDao;
@@ -18,11 +17,9 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
      * This creates a new EmployeeFacadeImpl
      * @param employeeDao this helps for managing employee data.
      */
-
     public EmployeeFacadeImpl(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
-
 
     @Override
     public List<Employee> getAllEmployees() {
@@ -30,16 +27,16 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
-    public Employee getEmployeeById(String employee_id) throws RuntimeException {
+    public Employee getEmployeeById(String employee_id) {
         return employeeDao.getEmployeeById(employee_id);
     }
 
     @Override
-    public boolean addEmployee(Employee employee) {
+    public boolean addEmployee(Employee employee) throws RuntimeException {
         boolean result = false;
         try {
             Employee targetEmployee = getEmployeeById(employee.getEmployeeNo());
-            if(targetEmployee != null) {
+            if (targetEmployee != null) {
                 throw new Exception("Employee to add already exists. ");
             }
             result = employeeDao.addEmployee(employee);
@@ -49,10 +46,13 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
         return result;
     }
 
-
     @Override
-    public boolean updateEmployee(Employee employee) {
+    public boolean updateEmployee(Employee employee) throws RuntimeException {
         try {
+            Employee existingEmployee = getEmployeeById(employee.getEmployeeNo());
+            if (existingEmployee == null) {
+                throw new RuntimeException("Employee to update does not exist.");
+            }
             return employeeDao.updateEmployee(employee);
         } catch (Exception e) {
             throw new RuntimeException("Error updating employee", e);
