@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 /**
  * Employee model class representing employee information.
  */
-
 public class Employee {
     private String lastName;
     private String firstName;
@@ -31,7 +30,6 @@ public class Employee {
      */
 
     public Employee(){
-
     }
 
     /**
